@@ -44,3 +44,5 @@ VITE_APP_NAME="${APP_NAME}"
 EOF
 npm ci
 npm run build
+# Buat nama file deterministik untuk CSS/JS agar Blade bisa memuat tanpa baca manifest
+node -e "const fs=require('fs');const path=require('path');const mf=path.join('public','build','manifest.json');if(fs.existsSync(mf)){const m=JSON.parse(fs.readFileSync(mf,'utf8'));const ensure=(srcKey,target)=>{if(m[srcKey]&&m[srcKey].file){const src=path.join('public','build',m[srcKey].file);const dst=path.join('public','build','assets',target);try{fs.copyFileSync(src,dst);}catch(e){}}};ensure('resources/css/app.css','app.css');ensure('resources/js/app.js','app.js');}"

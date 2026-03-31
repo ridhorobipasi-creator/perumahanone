@@ -18,18 +18,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
     @php
+        $cssStable = public_path('build/assets/app.css');
+        $jsStable = public_path('build/assets/app.js');
         $manifestPath = public_path('build/manifest.json');
     @endphp
-    @if (file_exists($manifestPath))
+    @if (file_exists($cssStable))
+        <link rel="stylesheet" href="{{ url('/build/assets/app.css') }}"/>
+    @elseif (file_exists($manifestPath))
         @php $m = json_decode(file_get_contents($manifestPath), true); @endphp
         @if(isset($m['resources/css/app.css']['file']))
             <link rel="stylesheet" href="{{ url('/build/'.$m['resources/css/app.css']['file']) }}"/>
         @endif
+    @else
+        @vite(['resources/css/app.css'])
+    @endif
+    @if (file_exists($jsStable))
+        <script type="module" src="{{ url('/build/assets/app.js') }}" defer></script>
+    @elseif (file_exists($manifestPath))
+        @php $m = isset($m)?$m:json_decode(file_get_contents($manifestPath), true); @endphp
         @if(isset($m['resources/js/app.js']['file']))
             <script type="module" src="{{ url('/build/'.$m['resources/js/app.js']['file']) }}" defer></script>
         @endif
     @else
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/js/app.js'])
     @endif
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #fff8f8; color: #1e1b1c; }
