@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.7.2"
+    }
+  },
+  "routes": [
+    { "src": "/build/(.*)", "dest": "/perumahan-web/public/build/$1" },
+    { "src": "/favicon.ico", "dest": "/perumahan-web/public/favicon.ico" },
+    { "src": "/robots.txt", "dest": "/perumahan-web/public/robots.txt" },
+    { "src": "/(.*)", "dest": "/api/index.php" }
+  ]
+}
