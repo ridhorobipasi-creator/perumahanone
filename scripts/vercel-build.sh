@@ -1,7 +1,7 @@
 set -e
 cd perumahan-web
 mkdir -p /tmp/views
-KEY=$(php -r "echo 'base64:'.base64_encode(random_bytes(32));")
+KEY="base64:$(node -e "process.stdout.write(require('crypto').randomBytes(32).toString('base64'))")"
 cat > .env <<EOF
 APP_NAME="Bintang Emerald Properti"
 APP_ENV=production
