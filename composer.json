@@ -1,0 +1,9 @@
+{
+  "name": "vercel/bridge-root",
+  "private": true,
+  "scripts": {
+    "vercel": [
+      "composer install -d perumahan-web --no-dev --prefer-dist --optimize-autoloader --no-interaction"
+    ]
+  }
+}
