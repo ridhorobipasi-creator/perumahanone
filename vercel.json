@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "buildCommand": "cd perumahan-web && npm ci && npm run build",
+  "buildCommand": "cd perumahan-web && cp .env.production .env && composer install --no-dev --prefer-dist --optimize-autoloader && npm ci && npm run build",
   "functions": {
     "api/index.php": {
-      "runtime": "vercel-php@0.7.2"
+      "runtime": "vercel-php@0.7.2",
+      "includeFiles": "perumahan-web/**"
     }
   },
   "routes": [
