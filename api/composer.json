@@ -5,6 +5,12 @@
   "scripts": {
     "vercel": [
       "composer install -d ../perumahan-web --no-dev --prefer-dist --optimize-autoloader --no-interaction"
+    ],
+    "post-install-cmd": [
+      "composer install -d ../perumahan-web --no-dev --prefer-dist --optimize-autoloader --no-interaction"
+    ],
+    "post-update-cmd": [
+      "composer install -d ../perumahan-web --no-dev --prefer-dist --optimize-autoloader --no-interaction"
     ]
   }
 }
