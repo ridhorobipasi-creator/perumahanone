@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Katalog Properti | Architectural Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-dim": "#e1d8d9",
+              "on-secondary-fixed": "#1e1b1c",
+              "on-background": "#1e1b1c",
+              "tertiary-container": "#9f9e9e",
+              "surface-container-lowest": "#ffffff",
+              "surface-bright": "#fff8f8",
+              "secondary-container": "#e9e0e1",
+              "on-tertiary-fixed": "#1b1c1c",
+              "inverse-primary": "#51dad0",
+              "outline": "#6c7a78",
+              "surface-container": "#f5eced",
+              "on-tertiary-fixed-variant": "#474747",
+              "surface-container-high": "#efe6e7",
+              "on-primary-fixed-variant": "#00504b",
+              "surface-container-highest": "#e9e0e1",
+              "surface": "#fff8f8",
+              "error-container": "#ffdad6",
+              "error": "#ba1a1a",
+              "on-secondary-fixed-variant": "#4b4546",
+              "primary": "#006a64",
+              "tertiary-fixed": "#e4e2e1",
+              "inverse-on-surface": "#f8efef",
+              "primary-container": "#00b1a7",
+              "on-primary-fixed": "#00201e",
+              "outline-variant": "#bbc9c7",
+              "on-primary": "#ffffff",
+              "surface-tint": "#006a64",
+              "tertiary-fixed-dim": "#c8c6c6",
+              "on-tertiary": "#ffffff",
+              "on-primary-container": "#003d39",
+              "background": "#fff8f8",
+              "secondary": "#635d5e",
+              "on-surface": "#1e1b1c",
+              "on-secondary": "#ffffff",
+              "on-surface-variant": "#3c4948",
+              "surface-container-low": "#fbf1f2",
+              "secondary-fixed": "#e9e0e1",
+              "secondary-fixed-dim": "#cdc4c5",
+              "on-error-container": "#93000a",
+              "on-secondary-container": "#696364",
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#51dad0",
+              "tertiary": "#5f5e5e",
+              "surface-variant": "#e9e0e1",
+              "primary-fixed": "#72f7ec",
+              "inverse-surface": "#342f30",
+              "on-tertiary-container": "#353535"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-background antialiased selection:bg-primary/20">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-bold tracking-tighter text-[#006a64] dark:text-[#00b1a7]">
+                Architectural Curator
+            </div>
+<div class="hidden lg:flex items-center space-x-6 font-['Inter'] tracking-tight text-sm font-medium uppercase">
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#006a64] transition-colors" href="#">Beranda</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#006a64] transition-colors" href="#">Tentang Kami</a>
+<a class="text-[#006a64] dark:text-[#00b1a7] font-bold border-b-2 border-[#006a64] pb-1" href="#">Proyek</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#006a64] transition-colors" href="#">Promo</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#006a64] transition-colors" href="#">Tim Bintang</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#006a64] transition-colors" href="#">Artikel</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#006a64] transition-colors" href="#">Hubungi Kami</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-[#006a64] transition-colors" href="#">Karir</a>
+</div>
+<div class="flex items-center space-x-6">
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-md font-medium text-sm transition-all duration-300 hover:opacity-90 scale-95 active:scale-100">
+                    Konsultasi Gratis
+                </button>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="pt-32 pb-24 px-8 max-w-screen-2xl mx-auto flex flex-col md:flex-row gap-12">
+<!-- Sidebar Filters -->
+<aside class="w-full md:w-80 shrink-0">
+<div class="sticky top-32 space-y-10">
+<div>
+<h2 class="text-on-surface font-bold text-lg mb-6 tracking-tight">Filter Koleksi</h2>
+<!-- Search Input -->
+<div class="relative mb-8">
+<input class="w-full bg-surface-container-lowest border-0 border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 px-0 py-3 text-sm transition-all duration-300 placeholder:text-on-surface-variant/50" placeholder="Cari properti..." type="text"/>
+<span class="material-symbols-outlined absolute right-0 top-3 text-on-surface-variant/50">search</span>
+</div>
+<!-- Filter Groups -->
+<div class="space-y-8">
+<!-- House Type -->
+<section>
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant/60 mb-4">Gaya Arsitektur</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-2 rounded-full bg-primary text-on-primary text-xs font-medium cursor-pointer">Minimalis</span>
+<span class="px-4 py-2 rounded-full bg-surface-container-low text-on-surface-variant text-xs font-medium cursor-pointer hover:bg-surface-container-high transition-colors">Klasik</span>
+<span class="px-4 py-2 rounded-full bg-surface-container-low text-on-surface-variant text-xs font-medium cursor-pointer hover:bg-surface-container-high transition-colors">Komersial</span>
+</div>
+</section>
+<!-- Price Range -->
+<section>
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant/60 mb-4">Rentang Harga</h3>
+<div class="space-y-4">
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" max="20000000000" min="500000000" step="100000000" type="range"/>
+<div class="flex justify-between text-xs font-medium text-on-surface-variant">
+<span>Rp 500 Jt</span>
+<span>Rp 20 M+</span>
+</div>
+</div>
+</section>
+<!-- Location -->
+<section>
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant/60 mb-4">Wilayah (Sumut)</h3>
+<div class="space-y-2">
+<label class="flex items-center space-x-3 group cursor-pointer">
+<input checked="" class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Medan</span>
+</label>
+<label class="flex items-center space-x-3 group cursor-pointer">
+<input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Deli Serdang</span>
+</label>
+<label class="flex items-center space-x-3 group cursor-pointer">
+<input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Binjai</span>
+</label>
+<label class="flex items-center space-x-3 group cursor-pointer">
+<input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Langkat</span>
+</label>
+</div>
+</section>
+</div>
+</div>
+<div class="p-6 bg-surface-container-low rounded-xl">
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                        Koleksi kurasi mingguan oleh pencari arsitektur kami di Sumatera Utara.
+                    </p>
+<button class="mt-4 text-primary font-bold text-xs uppercase tracking-widest inline-flex items-center group">
+                        Pelajari proses seleksi
+                        <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Listing Grid -->
+<section class="flex-1">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h1 class="text-4xl font-bold tracking-tight text-on-surface mb-2">Properti Pilihan</h1>
+<p class="text-on-surface-variant text-lg">Menampilkan 12 dari 48 properti sesuai estetika Anda.</p>
+</div>
+<div class="flex items-center space-x-4 border-b border-outline-variant/30 pb-2">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant/60">Urutkan</span>
+<select class="bg-transparent border-0 text-sm font-semibold text-primary focus:ring-0 py-0 pl-0 pr-8">
+<option>Terbaru</option>
+<option>Harga: Tertinggi</option>
+<option>Harga: Terendah</option>
+<option>Luas Bangunan</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-16">
+<!-- Property Card 1 -->
+<article class="group cursor-pointer">
+<div class="relative aspect-[16/10] overflow-hidden rounded-full mb-6">
+<img alt="Griya Asri Medan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4-1PU9iEk0mVlmMkLhBSYnZ1TzL-yfLKZNORXr1TeWjBv5Gd_dPf_mBBUZ5ATicnQJ0vs5FYcp7Ji3kSIuymMQ0M4kjg2Qj4FZAV0vK8dE5a-whr4ydAlJCNdT6GRZqWoQZJCHKgJ-66WigzxmwTyqRbmwFqTBjybWiAiTNE6MkaRc1bNp_G-_6LAWUjbpLtzeMS2AjTWlOPD41cdrF5B9XmfjCtQYArQ9y2Y0lpvyJkjn3X8ULi4lEAdWIQO0mqlbJnoEgIS2pY"/>
+<div class="absolute top-6 left-6 px-4 py-1 bg-white/80 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest text-primary">
+                            Listing Baru
+                        </div>
+</div>
+<div class="px-2">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-2xl font-bold text-on-surface">Griya Asri Medan</h3>
+<span class="text-2xl font-light text-primary tracking-tighter">Rp 2,85 M</span>
+</div>
+<p class="text-on-surface-variant mb-6 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                            Setiabudi, Medan
+                        </p>
+<div class="flex items-center gap-8 border-t border-surface-container pt-6">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm">bed</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">4 Kamar</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm">bathtub</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">3 Mandi</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm">directions_car</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">2 Garasi</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Property Card 2 -->
+<article class="group cursor-pointer translate-y-8">
+<div class="relative aspect-[16/10] overflow-hidden rounded-full mb-6">
+<img alt="Perumahan Deli Indah" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1jxRJY50Mg80Zw-goW7IY2-HjtNN-GkB4FXhaNscdagM0aEuVOadYsvcPB0FCTmMh3F0uXQ2iYqUElrizvYEyqLcWoFQonnNotC-FinKTP5uFvoVoJp8hJ7DuFbxFzuSzYy9x7E7B-nECnVjQBTdEn5ga8My8eGewy_HPTfKiG6k8QQtQkiEwhUyewx5-qtGLdmLmKOKKY5xT_jM0a1B5wYSBhpExL9I9-mCyge8gtQGHepe8RJXoKoKHqw2Rqyk9KwKhqa4QozY"/>
+</div>
+<div class="px-2">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-2xl font-bold text-on-surface">Perumahan Deli Indah</h3>
+<span class="text-2xl font-light text-primary tracking-tighter">Rp 4,1 M</span>
+</div>
+<p class="text-on-surface-variant mb-6 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                            Tanjung Morawa, Deli Serdang
+                        </p>
+<div class="flex items-center gap-8 border-t border-surface-container pt-6">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm">bed</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">3 Kamar</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm">bathtub</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">4 Mandi</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm">square_foot</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">320 M²</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Property Card 3 -->
+<article class="group cursor-pointer">
+<div class="relative aspect-[16/10] overflow-hidden rounded-full mb-6">
+<img alt="Binjai Resident" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHJTW9tiV3Q80F0PkWf0s8CapGhfzQmh3utL1gJwB_zvx-ESHazr7hTvh_-FDAqniEe5gkO61yhLL54bbfRmJYrGnzkC_is0xLYuNcd6Y94_Q-55oZ6ij0hVKFCBVwqS0ObfwkaSTuopRoVH_BWJPwuEVugQgWoSrbvgx_FBnjDJxgPSB0LdGmsZc9Jznl9PTMP3O8lMt3AOkfhR-SCVeloCVKGWYR81q0C1zG-UT6jv-wbduMoeT_zHbR-RhV_xjS_sdMRKQBy5Y"/>
+</div>
+<div class="px-2">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-2xl font-bold text-on-surface">Binjai Resident</h3>
+<span class="text-2xl font-light text-primary tracking-tighter">Rp 850 Jt</span>
+</div>
+<p class="text-on-surface-variant mb-6 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                            Binjai Timur, Binjai
+                        </p>
+<div class="flex items-center gap-8 border-t border-surface-container pt-6">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm">bed</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">2 Kamar</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm">local_fire_department</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Dapur Luas</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm">garage_home</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Taman</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Property Card 4 -->
+<article class="group cursor-pointer translate-y-8">
+<div class="relative aspect-[16/10] overflow-hidden rounded-full mb-6">
+<img alt="Langkat Riverside Villa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpKT61d1isee_DdMIEZk7_7po83sEV9yHOGXo5fILlIBC_d47ryeZEllw4XydWKFS8Qcr5Nj20GnqlzMcK6BwYz8HJfahqNZtUSMu_HoEgGlndRGJ4O7yRt4osoU8Z2Q5FehcF_BStcQMXiOG5wRc65NO1xM12mz3xCYurG_ViTV3EE_SV6RtqG-AtPKDsCzWmDvfFxdidGR_zgH38AYMSgWhg6ztseDkFCLMTsOUK6jZPBVdAX4jMgAxy9bYCbQ93QfZOYRpdSoQ"/>
+</div>
+<div class="px-2">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-2xl font-bold text-on-surface">Langkat Riverside Villa</h3>
+<span class="text-2xl font-light text-primary tracking-tighter">Rp 6,2 M</span>
+</div>
+<p class="text-on-surface-variant mb-6 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                            Bahorok, Langkat
+                        </p>
+<div class="flex items-center gap-8 border-t border-surface-container pt-6">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm">pool</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Kolam</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm">bed</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">6 Kamar</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm">wine_bar</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Bar</span>
+</div>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<div class="mt-24 flex justify-center items-center gap-8">
+<button class="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center hover:bg-surface-container transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:-translate-x-1 transition-transform">arrow_back</span>
+</button>
+<div class="flex gap-4">
+<span class="text-primary font-black border-b-2 border-primary pb-1">01</span>
+<span class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer">02</span>
+<span class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer">03</span>
+<span class="text-on-surface-variant">...</span>
+<span class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer">08</span>
+</div>
+<button class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center hover:opacity-90 transition-opacity group">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#f5eced] w-full border-t-0">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-20 max-w-screen-2xl mx-auto font-['Inter'] text-sm leading-relaxed">
+<div class="col-span-1 md:col-span-1">
+<div class="text-xl font-bold text-[#1e1b1c] mb-4">Architectural Curator</div>
+<p class="text-slate-500 max-w-xs">
+                    Mengubah real estat menjadi perjalanan editorial kelas atas. Temukan ruang hunian yang merupakan karya seni.
+                </p>
+</div>
+<div>
+<h4 class="font-bold text-[#006a64] uppercase tracking-widest text-xs mb-6">Direktori</h4>
+<ul class="space-y-4 text-slate-500">
+<li><a class="hover:text-[#00b1a7] transition-colors underline-offset-4 hover:underline" href="#">Portofolio</a></li>
+<li><a class="hover:text-[#00b1a7] transition-colors underline-offset-4 hover:underline" href="#">Desainer</a></li>
+<li><a class="hover:text-[#00b1a7] transition-colors underline-offset-4 hover:underline" href="#">Keberlanjutan</a></li>
+<li><a class="hover:text-[#00b1a7] transition-colors underline-offset-4 hover:underline" href="#">Wawasan</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-[#006a64] uppercase tracking-widest text-xs mb-6">Legal</h4>
+<ul class="space-y-4 text-slate-500">
+<li><a class="hover:text-[#00b1a7] transition-colors underline-offset-4 hover:underline" href="#">Kebijakan Privasi</a></li>
+<li><a class="hover:text-[#00b1a7] transition-colors underline-offset-4 hover:underline" href="#">Syarat &amp; Ketentuan</a></li>
+<li><a class="hover:text-[#00b1a7] transition-colors underline-offset-4 hover:underline" href="#">Kebijakan Cookie</a></li>
+<li><a class="hover:text-[#00b1a7] transition-colors underline-offset-4 hover:underline" href="#">Laporan Keberlanjutan</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-[#006a64] uppercase tracking-widest text-xs mb-6">Hubungkan</h4>
+<ul class="space-y-4 text-slate-500">
+<li><a class="hover:text-[#00b1a7] transition-colors underline-offset-4 hover:underline" href="#">Instagram</a></li>
+<li><a class="hover:text-[#00b1a7] transition-colors underline-offset-4 hover:underline" href="#">LinkedIn</a></li>
+<li><a class="hover:text-[#00b1a7] transition-colors underline-offset-4 hover:underline" href="#">Email Kurator</a></li>
+</ul>
+</div>
+</div>
+<div class="px-12 py-8 max-w-screen-2xl mx-auto border-t border-slate-200/50 flex flex-col md:flex-row justify-between items-center text-slate-500 text-xs">
+<p>© 2024 Architectural Curator. Hak cipta dilindungi undang-undang.</p>
+<p class="mt-4 md:mt-0 italic">Anggota Global Architecture Guild</p>
+</div>
+</footer>
+</body></html>

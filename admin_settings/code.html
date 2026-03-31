@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Settings | Bintang Emerald</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#fff8f8",
+              "tertiary-container": "#9f9e9e",
+              "on-surface-variant": "#3c4948",
+              "inverse-primary": "#51dad0",
+              "surface-container-highest": "#e9e0e1",
+              "secondary": "#635d5e",
+              "secondary-fixed-dim": "#cdc4c5",
+              "surface": "#fff8f8",
+              "on-primary-container": "#003d39",
+              "on-secondary-fixed-variant": "#4b4546",
+              "secondary-fixed": "#e9e0e1",
+              "secondary-container": "#e9e0e1",
+              "tertiary-fixed-dim": "#c8c6c6",
+              "surface-tint": "#006a64",
+              "surface-container-lowest": "#ffffff",
+              "inverse-on-surface": "#f8efef",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "inverse-surface": "#342f30",
+              "primary": "#006a64",
+              "on-secondary": "#ffffff",
+              "on-primary": "#ffffff",
+              "on-background": "#1e1b1c",
+              "tertiary": "#5f5e5e",
+              "surface-container-high": "#efe6e7",
+              "on-tertiary-container": "#353535",
+              "surface-dim": "#e1d8d9",
+              "on-tertiary": "#ffffff",
+              "on-secondary-fixed": "#1e1b1c",
+              "surface-variant": "#e9e0e1",
+              "on-tertiary-fixed-variant": "#474747",
+              "on-surface": "#1e1b1c",
+              "surface-container": "#f5eced",
+              "surface-container-low": "#fbf1f2",
+              "on-error-container": "#93000a",
+              "on-primary-fixed-variant": "#00504b",
+              "background": "#fff8f8",
+              "on-secondary-container": "#696364",
+              "on-primary-fixed": "#00201e",
+              "tertiary-fixed": "#e4e2e1",
+              "error": "#ba1a1a",
+              "outline-variant": "#bbc9c7",
+              "on-tertiary-fixed": "#1b1c1c",
+              "primary-fixed-dim": "#51dad0",
+              "outline": "#6c7a78",
+              "primary-fixed": "#72f7ec",
+              "primary-container": "#00b1a7"
+            },
+            fontFamily: {
+              "headline": ["Inter", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .tonal-shift-bg {
+            background: linear-gradient(180deg, #fbf1f2 0%, #f5eced 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex flex-col h-full py-6 px-4 z-50">
+<div class="mb-10 px-2">
+<h1 class="text-lg font-black text-teal-900 dark:text-white tracking-tighter">Bintang Emerald</h1>
+<p class="text-xs font-medium text-slate-500 uppercase tracking-widest mt-1">Management Suite</p>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all rounded-lg cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-sans text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all rounded-lg cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="domain">domain</span>
+<span class="font-sans text-sm font-medium">Properties</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all rounded-lg cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="contact_page">contact_page</span>
+<span class="font-sans text-sm font-medium">Leads</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all rounded-lg cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+<span class="font-sans text-sm font-medium">Content</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-teal-700 dark:text-teal-400 bg-teal-50/50 dark:bg-teal-900/20 rounded-lg border-r-4 border-teal-600 cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-sans text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 space-y-1">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-3 px-4 rounded-md font-semibold text-sm mb-6 flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                Add New Listing
+            </button>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all rounded-lg text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                Help Center
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-error hover:bg-error/5 transition-all rounded-lg text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-40 bg-white/70 dark:bg-slate-900/70 backdrop-blur-3xl border-b border-slate-100 dark:border-slate-800 shadow-sm dark:shadow-none flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center flex-1">
+<div class="relative w-96 max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-sm focus:ring-2 focus:ring-primary/20" placeholder="Search settings or listings..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors duration-200 rounded-full relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2.5 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors duration-200 rounded-full">
+<span class="material-symbols-outlined" data-icon="apps">apps</span>
+</button>
+<div class="h-8 w-px bg-slate-200 mx-2"></div>
+<button class="flex items-center gap-3 pl-2 pr-1 py-1 rounded-full hover:bg-slate-50 transition-colors">
+<span class="text-sm font-bold tracking-tight text-teal-800">Admin User</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="portrait of a professional male executive in a grey suit against a neutral studio background, high-end corporate photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDo4_KAg-SGcUymjGxmKaH5bXC0YH5O4j1VyCiB0nfB9CRVpYJm2OD0aJUOVV3q3HfpaH-jNmOWGBbBbHgIN0JwC5-XsFdd1C81l1E5fmQsBs1AcMglF5gJdT_U5ElCjqPWD_dqKcU7BUPFjH-vptZKK9mfdJdwKyg51o0sg5apZPnoP7NaePrgLxV2R7vAbOTavvrXDLjmpMDppffuTMXFaxJscse8It1GT5qdS6ewygFQrV_kVejydw32Gp_dFFBY9cqiNVXe8c4"/>
+</div>
+</button>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-8 lg:p-12 max-w-6xl mx-auto">
+<!-- Page Header -->
+<div class="mb-12">
+<h2 class="text-4xl font-black tracking-tight text-on-background mb-2">Settings</h2>
+<p class="text-secondary font-medium">Manage your agency profile, security preferences, and global configurations.</p>
+</div>
+<!-- Bento Layout for Settings -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Navigation/Tabs -->
+<div class="lg:col-span-1 space-y-6">
+<div class="bg-surface-container-lowest rounded-full p-6 shadow-sm">
+<nav class="space-y-2">
+<a class="flex items-center justify-between p-3 rounded-xl bg-primary text-on-primary group transition-all" href="#company">
+<span class="flex items-center gap-3 font-semibold">
+<span class="material-symbols-outlined" data-icon="business">business</span>
+                                    Company Profile
+                                </span>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container text-on-surface-variant group transition-all" href="#social">
+<span class="flex items-center gap-3 font-medium">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+                                    Social Media
+                                </span>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container text-on-surface-variant group transition-all" href="#security">
+<span class="flex items-center gap-3 font-medium">
+<span class="material-symbols-outlined" data-icon="shield_lock">shield_lock</span>
+                                    Security &amp; Password
+                                </span>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container text-on-surface-variant group transition-all" href="#notifications">
+<span class="flex items-center gap-3 font-medium">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+                                    Alert Preferences
+                                </span>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</a>
+</nav>
+</div>
+<!-- Small Help Card -->
+<div class="bg-surface-container-high rounded-full p-8 relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="font-bold text-teal-900 mb-2">Need assistance?</h4>
+<p class="text-xs text-secondary-fixed-dim leading-relaxed mb-4">Our dedicated account managers are available 24/7 for technical support.</p>
+<button class="text-primary text-xs font-bold uppercase tracking-widest border-b-2 border-primary pb-1">Contact Support</button>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-8xl text-teal-800/10 rotate-12" data-icon="support_agent">support_agent</span>
+</div>
+</div>
+<!-- Right Column: Main Form Area -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Company Information Section -->
+<section class="bg-surface-container-lowest rounded-full p-10 shadow-sm border border-outline-variant/10" id="company">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="text-xl font-bold text-on-background">Company Information</h3>
+<p class="text-sm text-secondary">Public identity of your real estate group.</p>
+</div>
+<span class="bg-primary/10 text-primary text-[10px] font-black uppercase tracking-tighter px-3 py-1 rounded-full">Enterprise</span>
+</div>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Legal Business Name</label>
+<input class="w-full bg-surface-container-low border-none rounded-md px-4 py-3 focus:ring-2 focus:ring-primary/20 text-sm font-medium" type="text" value="Bintang Emerald Property Group"/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Business License #</label>
+<input class="w-full bg-surface-container-low border-none rounded-md px-4 py-3 focus:ring-2 focus:ring-primary/20 text-sm font-medium" type="text" value="RE-990-2134-XY"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Headquarters Address</label>
+<textarea class="w-min-full w-full bg-surface-container-low border-none rounded-md px-4 py-3 focus:ring-2 focus:ring-primary/20 text-sm font-medium" rows="2">Jalan Emerald No. 88, Suite 402, Menteng, Jakarta Pusat, 10310</textarea>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Primary Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm" data-icon="mail">mail</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-low border-none rounded-md focus:ring-2 focus:ring-primary/20 text-sm font-medium" type="email" value="contact@bintang-emerald.com"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Phone Number</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm" data-icon="call">call</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-low border-none rounded-md focus:ring-2 focus:ring-primary/20 text-sm font-medium" type="tel" value="+62 21 555 0192"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Social Media Links -->
+<section class="bg-surface-container-lowest rounded-full p-10 shadow-sm border border-outline-variant/10" id="social">
+<h3 class="text-xl font-bold text-on-background mb-2">Social Presence</h3>
+<p class="text-sm text-secondary mb-8">Links used for property watermarks and listing footers.</p>
+<div class="space-y-4">
+<div class="flex items-center gap-4 group">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container">
+<span class="material-symbols-outlined text-teal-800" data-icon="language">language</span>
+</div>
+<input class="flex-1 bg-surface-container-low border-none rounded-md px-4 py-2 text-sm focus:ring-1 focus:ring-primary/40" placeholder="https://instagram.com/bintangproperty" type="text"/>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container">
+<span class="material-symbols-outlined text-teal-800" data-icon="alternate_email">alternate_email</span>
+</div>
+<input class="flex-1 bg-surface-container-low border-none rounded-md px-4 py-2 text-sm focus:ring-1 focus:ring-primary/40" placeholder="https://linkedin.com/company/bintangemerald" type="text"/>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container">
+<span class="material-symbols-outlined text-teal-800" data-icon="movie">movie</span>
+</div>
+<input class="flex-1 bg-surface-container-low border-none rounded-md px-4 py-2 text-sm focus:ring-1 focus:ring-primary/40" placeholder="https://youtube.com/c/bintangemerald" type="text"/>
+</div>
+</div>
+</section>
+<!-- User Account / Security Section -->
+<section class="bg-surface-container-low rounded-full p-10 border-2 border-dashed border-outline-variant/30" id="security">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-md">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="close up of professional executive face looking confident, soft warm natural lighting, shallow depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvBm5lIAcGbH02LQu2CLr4PSYj7-1DIBqWklBxVDA0_nU826WL5Ja85OCwvZHgbkLDDuWuV-FPdxpsafrjSxn6V4rlFhb-5qRcGGCwGvXzctbpVG1-2AVTUsC55EHIW0xDV0vtf8RfPTvIXmdeA5B0VywRvM5eCI-JdzYNbYhNOq7UgZWivRctdMPXLW6__zKw6eiee1KERl23KI6v2PuwuLYzUpCceDwAsdgvcAjrntphybdjVa8aPHu1tUj-5AZNNFq5U0S9l3c"/>
+</div>
+<div>
+<h3 class="text-lg font-bold text-on-background">Personal Security</h3>
+<p class="text-xs text-secondary font-medium">Update password and email for account admin@bintang.com</p>
+</div>
+</div>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Current Password</label>
+<input class="w-full bg-surface-container-lowest border-none rounded-md px-4 py-3 focus:ring-2 focus:ring-primary/20 text-sm font-medium" type="password" value="••••••••••••"/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-black uppercase tracking-widest text-secondary block">New Password</label>
+<input class="w-full bg-surface-container-lowest border-none rounded-md px-4 py-3 focus:ring-2 focus:ring-primary/20 text-sm font-medium" placeholder="Leave blank to keep same" type="password"/>
+</div>
+</div>
+<div class="p-4 bg-primary/5 rounded-xl border border-primary/10 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="info">info</span>
+<p class="text-[11px] text-teal-900 leading-relaxed">Two-factor authentication (2FA) is currently <strong>enabled</strong> for this account. Your session will remain active for 24 hours.</p>
+</div>
+</div>
+</section>
+<!-- Form Actions -->
+<div class="flex items-center justify-end gap-4 pt-4">
+<button class="px-8 py-3 bg-surface-container-highest text-on-surface font-bold text-sm rounded-md hover:bg-surface-dim transition-colors">Discard Changes</button>
+<button class="px-10 py-3 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold text-sm rounded-md shadow-xl shadow-primary/30 active:scale-95 transition-all">Save Global Settings</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Decorative -->
+<footer class="mt-12 py-12 px-8 border-t border-surface-container-high text-center">
+<p class="text-xs text-secondary-fixed-dim font-medium tracking-tighter">© 2024 Bintang Emerald Property Group. All Rights Reserved. System Version 4.2.0-Alpha</p>
+</footer>
+</main>
+<!-- Contextual FAB (Hidden on settings pages per mandate) -->
+<!-- Suppression Logic: FAB is suppressed because this is a focused "Settings" screen -->
+</body></html>

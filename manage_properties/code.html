@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bintang Admin - Property Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#fff8f8",
+              "tertiary-container": "#9f9e9e",
+              "on-surface-variant": "#3c4948",
+              "inverse-primary": "#51dad0",
+              "surface-container-highest": "#e9e0e1",
+              "secondary": "#635d5e",
+              "secondary-fixed-dim": "#cdc4c5",
+              "surface": "#fff8f8",
+              "on-primary-container": "#003d39",
+              "on-secondary-fixed-variant": "#4b4546",
+              "secondary-fixed": "#e9e0e1",
+              "secondary-container": "#e9e0e1",
+              "tertiary-fixed-dim": "#c8c6c6",
+              "surface-tint": "#006a64",
+              "surface-container-lowest": "#ffffff",
+              "inverse-on-surface": "#f8efef",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "inverse-surface": "#342f30",
+              "primary": "#006a64",
+              "on-secondary": "#ffffff",
+              "on-primary": "#ffffff",
+              "on-background": "#1e1b1c",
+              "tertiary": "#5f5e5e",
+              "surface-container-high": "#efe6e7",
+              "on-tertiary-container": "#353535",
+              "surface-dim": "#e1d8d9",
+              "on-tertiary": "#ffffff",
+              "on-secondary-fixed": "#1e1b1c",
+              "surface-variant": "#e9e0e1",
+              "on-tertiary-fixed-variant": "#474747",
+              "on-surface": "#1e1b1c",
+              "surface-container": "#f5eced",
+              "surface-container-low": "#fbf1f2",
+              "on-error-container": "#93000a",
+              "on-primary-fixed-variant": "#00504b",
+              "background": "#fff8f8",
+              "on-secondary-container": "#696364",
+              "on-primary-fixed": "#00201e",
+              "tertiary-fixed": "#e4e2e1",
+              "error": "#ba1a1a",
+              "outline-variant": "#bbc9c7",
+              "on-tertiary-fixed": "#1b1c1c",
+              "primary-fixed-dim": "#51dad0",
+              "outline": "#6c7a78",
+              "primary-fixed": "#72f7ec",
+              "primary-container": "#00b1a7"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- Sidebar Navigation -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex flex-col py-6 px-4 z-50">
+<div class="mb-10 px-4">
+<h1 class="text-lg font-black text-teal-900 dark:text-white leading-tight">Bintang Emerald</h1>
+<p class="text-xs font-medium text-slate-500 uppercase tracking-widest">Management Suite</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all font-sans text-sm font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-teal-700 dark:text-teal-400 bg-teal-50/50 dark:bg-teal-900/20 rounded-lg border-r-4 border-teal-600 font-sans text-sm font-medium" href="#">
+<span class="material-symbols-outlined">domain</span>
+                Properties
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all font-sans text-sm font-medium" href="#">
+<span class="material-symbols-outlined">contact_page</span>
+                Leads
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all font-sans text-sm font-medium" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+                Content
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all font-sans text-sm font-medium" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto border-t border-slate-200 dark:border-slate-800 pt-6 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-teal-600 text-sm font-medium transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+                Help Center
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-error text-sm font-medium transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- Top App Bar -->
+<header class="w-full sticky top-0 z-40 bg-white/70 dark:bg-slate-900/70 backdrop-blur-3xl border-b border-slate-100 dark:border-slate-800 shadow-sm dark:shadow-none flex items-center justify-between px-8 h-16">
+<div class="flex items-center flex-1">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-slate-400" placeholder="Search properties, owners, or IDs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors duration-200 rounded-full relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors duration-200 rounded-full">
+<span class="material-symbols-outlined">apps</span>
+</button>
+<div class="h-8 w-px bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-teal-900 dark:text-teal-50">Admin User</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-tighter">Chief Editor</p>
+</div>
+<img alt="Administrator Profile" class="w-9 h-9 rounded-full object-cover border-2 border-primary/10 group-hover:border-primary transition-all" data-alt="professional headshot of a middle-aged male administrator with a confident expression in a clean studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4xpUXD-SlWY2oKuvLVvZOeox3o78n7PRWkAfq_qzxc6jw_zgNT69f4QYRx8cePtpa05x6n7OuaXM8Etpfzp4VUdKLrHSC0M2J2faWblFS7qjjem5r84l-MTiuF4CtyhyAfDT1GOYKEq5yRDIbr4OVhVOVuPUC7iwfjBgp9WzVQyf1PVAb97A0NiSSiJKan0ERXmIFTbDicu9j5Wx2gWT00TmJTReP5P-v4U67Wjxj-XHIulHgZNQBufjFJUsCQo3uWyVZgZ9bdd0"/>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-8">
+<!-- Breadcrumbs & Title Row -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<nav class="flex gap-2 text-xs font-medium text-slate-400 mb-2 uppercase tracking-widest">
+<a class="hover:text-primary transition-colors" href="#">Dashboard</a>
+<span>/</span>
+<span class="text-primary-container">Properties</span>
+</nav>
+<h2 class="text-4xl font-extrabold text-on-background tracking-tighter">Property Listings</h2>
+<p class="text-slate-500 mt-1 max-w-xl">Manage your architectural portfolio. Update listings, track performance, and curate the gallery experience for potential buyers.</p>
+</div>
+<button class="flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-white font-semibold rounded-md shadow-lg shadow-primary/20 hover:shadow-xl hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-xl">add</span>
+                    Add New Property
+                </button>
+</div>
+<!-- Stats Bar - Bento Style -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="bg-surface-container-lowest p-6 rounded-full border border-slate-100 shadow-sm">
+<p class="text-[10px] uppercase tracking-widest text-secondary mb-1">Total Assets</p>
+<div class="flex items-center justify-between">
+<span class="text-2xl font-black text-on-background">1,284</span>
+<span class="text-xs font-bold text-teal-600 bg-teal-50 px-2 py-0.5 rounded-full">+12%</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-full border border-slate-100 shadow-sm">
+<p class="text-[10px] uppercase tracking-widest text-secondary mb-1">Active Listings</p>
+<div class="flex items-center justify-between">
+<span class="text-2xl font-black text-on-background">842</span>
+<span class="text-xs font-bold text-teal-600 bg-teal-50 px-2 py-0.5 rounded-full">Stable</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-full border border-slate-100 shadow-sm">
+<p class="text-[10px] uppercase tracking-widest text-secondary mb-1">Pending Review</p>
+<div class="flex items-center justify-between">
+<span class="text-2xl font-black text-on-background">42</span>
+<span class="text-xs font-bold text-error bg-error-container px-2 py-0.5 rounded-full">+4</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-full border border-slate-100 shadow-sm">
+<p class="text-[10px] uppercase tracking-widest text-secondary mb-1">Portfolio Value</p>
+<div class="flex items-center justify-between">
+<span class="text-2xl font-black text-on-background">$4.2B</span>
+<span class="text-xs font-bold text-teal-600 bg-teal-50 px-2 py-0.5 rounded-full">+2.4%</span>
+</div>
+</div>
+</div>
+<!-- Filters & Table Container -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<!-- Filters Row -->
+<div class="p-6 flex flex-wrap items-center justify-between gap-4 border-b border-slate-50">
+<div class="flex items-center gap-2">
+<button class="bg-primary text-white text-xs font-bold px-4 py-2 rounded-full transition-all">All Properties</button>
+<button class="bg-surface-container-low text-on-surface-variant hover:bg-surface-container text-xs font-bold px-4 py-2 rounded-full transition-all">Residential</button>
+<button class="bg-surface-container-low text-on-surface-variant hover:bg-surface-container text-xs font-bold px-4 py-2 rounded-full transition-all">Commercial</button>
+<button class="bg-surface-container-low text-on-surface-variant hover:bg-surface-container text-xs font-bold px-4 py-2 rounded-full transition-all">Industrial</button>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 text-xs font-bold text-secondary border border-outline-variant/20 rounded-md hover:bg-slate-50 transition-all">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                            Advanced Filters
+                        </button>
+<button class="flex items-center gap-2 px-4 py-2 text-xs font-bold text-secondary border border-outline-variant/20 rounded-md hover:bg-slate-50 transition-all">
+<span class="material-symbols-outlined text-sm">file_download</span>
+                            Export CSV
+                        </button>
+</div>
+</div>
+<!-- Data Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-500">Property Details</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-500">Location</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-500">Type</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-500">Valuation</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-500">Status</th>
+<th class="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-500 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Modern Villa" class="w-full h-full object-cover" data-alt="ultra-modern glass-walled luxury villa nestled in a green forest with minimalist architecture and dusk lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXreprjmU2NUd5zMGXC9fxLRIGHUnftGnDA-jw2jFcZEwH56jMXAmoqFg4KcFBzR0XSJ2JuYLoJcxuI72XKq7SzlaDpyP7r4WbHrmv3Jc1qXJ-k8aWh6LjkhqKZoEXUcSQUChEpzIFLoGxqS9HLigYqh3JAE1k6PFYJTmCzyFO1ZhjAv8wdnalWMnk-TSBdku4ewcIjDA-r7XHNM4XRJbmS2hpa2KsYU0CbxR0VZavTViqI4cJC1fix8a4O5H_hg9d4OevPIbTLHs"/>
+</div>
+<div>
+<p class="font-bold text-on-background">The Emerald Pavilion</p>
+<p class="text-xs text-slate-400">ID: BNG-00124</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm font-medium text-on-surface">Beverly Hills, CA</p>
+<p class="text-[10px] text-slate-400">90210 District</p>
+</td>
+<td class="px-6 py-5">
+<span class="text-xs font-bold text-secondary uppercase tracking-tighter">Luxury Villa</span>
+</td>
+<td class="px-6 py-5">
+<p class="font-bold text-primary">$12,450,000</p>
+<p class="text-[10px] text-teal-600">+$240k this quarter</p>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-[10px] font-black uppercase">
+<span class="w-1 h-1 bg-teal-600 rounded-full"></span>
+                                        Published
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-error transition-colors">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-lg">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Glass Office" class="w-full h-full object-cover" data-alt="soaring skyscraper facade with reflective glass windows reflecting a bright blue sky and city skyline" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6axEl4atToLptQYXKW1k59iKsWarcTC4W182SpxG6wvLHlwY1SQ5R_3qWJ9Fwoj2A2_npQDRJ7RgbmlNECfTXDkW9Do_SN91AXKzxog6hWxn8Gj1LMFux4PB7M1s3hnCEhCul02Abz7eAkn6N2drW8nGPPkhTLXSnHaGTMEJO16R5J4LaQ60gMyEoubOW8C-wgMxatH1JuXUaZO8KB5IZmBOc6IOEhl3yDaA3VfyKUwmn5X3RXY8T-zcfgPDR_tjMa0p-gMzwBBA"/>
+</div>
+<div>
+<p class="font-bold text-on-background">North Star Tower</p>
+<p class="text-xs text-slate-400">ID: BNG-00982</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm font-medium text-on-surface">Downtown Chicago</p>
+<p class="text-[10px] text-slate-400">Financial Hub</p>
+</td>
+<td class="px-6 py-5">
+<span class="text-xs font-bold text-secondary uppercase tracking-tighter">Commercial</span>
+</td>
+<td class="px-6 py-5">
+<p class="font-bold text-primary">$84,200,000</p>
+<p class="text-[10px] text-slate-400">Lease: 94% Capacity</p>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-[10px] font-black uppercase">
+<span class="w-1 h-1 bg-amber-600 rounded-full"></span>
+                                        Under Offer
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-error transition-colors">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-lg">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Modern House" class="w-full h-full object-cover" data-alt="contemporary beachfront house with sleek white architecture and large pool at golden hour" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqK72CvaczW47sRFFyNvByt101OxM67gHVwonPFqEeWa92h_dwmNRq6MdlOQIsqhXxNnG8Xt1NCdXEvG8S0Xq8RNQjT8C9QX3K40Ihb2nFgV4tB-IIYqOVpKJEVN20TI0pLJYagFseHN9i-MRcGaYuM5b1B6noE7GCVBx_5mZLQXvRkk3tJtZ-yoIWcrLEWJC2pDkmL-2bfCz1-SAXw7p9mHFix7m1_f4_TFZEdqiNErDEYnGn7TH2b9mghXAiU25l2bMLKUbAmdU"/>
+</div>
+<div>
+<p class="font-bold text-on-background">Ocean Drift Residence</p>
+<p class="text-xs text-slate-400">ID: BNG-00215</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm font-medium text-on-surface">Miami Beach, FL</p>
+<p class="text-[10px] text-slate-400">Coastal Prime</p>
+</td>
+<td class="px-6 py-5">
+<span class="text-xs font-bold text-secondary uppercase tracking-tighter">Oceanfront</span>
+</td>
+<td class="px-6 py-5">
+<p class="font-bold text-primary">$4,890,000</p>
+<p class="text-[10px] text-error">New Listing</p>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-[10px] font-black uppercase">
+<span class="w-1 h-1 bg-slate-600 rounded-full"></span>
+                                        Draft
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-error transition-colors">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-lg">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Warehouse" class="w-full h-full object-cover" data-alt="vast high-tech warehouse interior with high ceilings, polished floors, and organized storage systems" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ0vcB7l-N-vB46fM3xzc7Y5JSXdF14dr8aHyqHjbw9TN07aYnEImCG1q-HKubeOF7hYHE6cmGZUilatbCbhYpydIS45_9bNADcbHl7mUphFWK3AKPPWzIlpm0vpgh4OAOOdOtEhB1wWx6cKYN7sMPeoIatxjHRMsrlJsn3XuXpapGG6sLRJlZWHz3KGAZZ3UlVNt0mJ0xnN9NS7MnfBV8wUUA-Mrp9qJuK-BoEjaKcRXWRNwcWWf9G-qHLH03EkGwMrGAjNcYlf8"/>
+</div>
+<div>
+<p class="font-bold text-on-background">Logistics Hub East</p>
+<p class="text-xs text-slate-400">ID: BNG-00833</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm font-medium text-on-surface">Savannah, GA</p>
+<p class="text-[10px] text-slate-400">Port District</p>
+</td>
+<td class="px-6 py-5">
+<span class="text-xs font-bold text-secondary uppercase tracking-tighter">Industrial</span>
+</td>
+<td class="px-6 py-5">
+<p class="font-bold text-primary">$18,200,000</p>
+<p class="text-[10px] text-teal-600">Stable Income</p>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-[10px] font-black uppercase">
+<span class="w-1 h-1 bg-teal-600 rounded-full"></span>
+                                        Published
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-error transition-colors">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-lg">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-6 py-4 flex items-center justify-between border-t border-slate-50">
+<p class="text-xs font-medium text-slate-500">Showing <span class="text-on-background">1 - 4</span> of 842 entries</p>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant/20 text-slate-400 hover:bg-slate-50 transition-all">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-white text-xs font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded text-slate-600 text-xs font-bold hover:bg-slate-50">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded text-slate-600 text-xs font-bold hover:bg-slate-50">3</button>
+<span class="text-slate-400 px-1 text-xs">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded text-slate-600 text-xs font-bold hover:bg-slate-50">210</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant/20 text-slate-400 hover:bg-slate-50 transition-all">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick Insights Section -->
+<div class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 bg-surface-container-low rounded-xl p-8 border border-slate-100">
+<h3 class="text-lg font-bold text-on-background mb-6">Market Trends - Portfolio Performance</h3>
+<div class="h-64 flex items-end gap-4">
+<div class="flex-1 bg-primary/10 rounded-t-md relative group">
+<div class="absolute inset-x-0 bottom-0 bg-primary h-[40%] rounded-t-md"></div>
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity">Jan</span>
+</div>
+<div class="flex-1 bg-primary/10 rounded-t-md relative group">
+<div class="absolute inset-x-0 bottom-0 bg-primary h-[55%] rounded-t-md"></div>
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity">Feb</span>
+</div>
+<div class="flex-1 bg-primary/10 rounded-t-md relative group">
+<div class="absolute inset-x-0 bottom-0 bg-primary h-[45%] rounded-t-md"></div>
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity">Mar</span>
+</div>
+<div class="flex-1 bg-primary/10 rounded-t-md relative group">
+<div class="absolute inset-x-0 bottom-0 bg-primary h-[70%] rounded-t-md"></div>
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity">Apr</span>
+</div>
+<div class="flex-1 bg-primary/10 rounded-t-md relative group">
+<div class="absolute inset-x-0 bottom-0 bg-primary h-[60%] rounded-t-md"></div>
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity">May</span>
+</div>
+<div class="flex-1 bg-primary/10 rounded-t-md relative group">
+<div class="absolute inset-x-0 bottom-0 bg-primary h-[85%] rounded-t-md"></div>
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity">Jun</span>
+</div>
+<div class="flex-1 bg-primary/10 rounded-t-md relative group">
+<div class="absolute inset-x-0 bottom-0 bg-primary h-[95%] rounded-t-md"></div>
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity">Jul</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-high rounded-xl p-8 border border-slate-200/50 flex flex-col">
+<h3 class="text-lg font-bold text-on-background mb-4">Lead Velocity</h3>
+<p class="text-xs text-slate-500 mb-8">Average time to close properties has decreased by 4.2 days this month.</p>
+<div class="flex-1 flex flex-col justify-center gap-6">
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="text-xs font-bold text-secondary uppercase">Residential</span>
+<span class="text-sm font-black">12 Days</span>
+</div>
+<div class="h-1.5 bg-white rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[30%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="text-xs font-bold text-secondary uppercase">Commercial</span>
+<span class="text-sm font-black">48 Days</span>
+</div>
+<div class="h-1.5 bg-white rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[75%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="text-xs font-bold text-secondary uppercase">Industrial</span>
+<span class="text-sm font-black">32 Days</span>
+</div>
+<div class="h-1.5 bg-white rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[55%]"></div>
+</div>
+</div>
+</div>
+<button class="mt-8 text-xs font-black text-primary uppercase tracking-widest hover:underline text-center">View Detailed Analytics</button>
+</div>
+</div>
+</div>
+<!-- Footer Info -->
+<footer class="p-8 border-t border-slate-100 mt-12 flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+<p>© 2024 Bintang Property Group — All Rights Reserved</p>
+<div class="flex gap-6">
+<a class="hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms</a>
+<a class="hover:text-primary transition-colors" href="#">Audit Log</a>
+</div>
+</footer>
+</main>
+</body></html>

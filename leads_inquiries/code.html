@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Leads &amp; Inquiries Manager | Bintang Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "surface-bright": "#fff8f8",
+                "tertiary-container": "#9f9e9e",
+                "on-surface-variant": "#3c4948",
+                "inverse-primary": "#51dad0",
+                "surface-container-highest": "#e9e0e1",
+                "secondary": "#635d5e",
+                "secondary-fixed-dim": "#cdc4c5",
+                "surface": "#fff8f8",
+                "on-primary-container": "#003d39",
+                "on-secondary-fixed-variant": "#4b4546",
+                "secondary-fixed": "#e9e0e1",
+                "secondary-container": "#e9e0e1",
+                "tertiary-fixed-dim": "#c8c6c6",
+                "surface-tint": "#006a64",
+                "surface-container-lowest": "#ffffff",
+                "inverse-on-surface": "#f8efef",
+                "on-error": "#ffffff",
+                "error-container": "#ffdad6",
+                "inverse-surface": "#342f30",
+                "primary": "#006a64",
+                "on-secondary": "#ffffff",
+                "on-primary": "#ffffff",
+                "on-background": "#1e1b1c",
+                "tertiary": "#5f5e5e",
+                "surface-container-high": "#efe6e7",
+                "on-tertiary-container": "#353535",
+                "surface-dim": "#e1d8d9",
+                "on-tertiary": "#ffffff",
+                "on-secondary-fixed": "#1e1b1c",
+                "surface-variant": "#e9e0e1",
+                "on-tertiary-fixed-variant": "#474747",
+                "on-surface": "#1e1b1c",
+                "surface-container": "#f5eced",
+                "surface-container-low": "#fbf1f2",
+                "on-error-container": "#93000a",
+                "on-primary-fixed-variant": "#00504b",
+                "background": "#fff8f8",
+                "on-secondary-container": "#696364",
+                "on-primary-fixed": "#00201e",
+                "tertiary-fixed": "#e4e2e1",
+                "error": "#ba1a1a",
+                "outline-variant": "#bbc9c7",
+                "on-tertiary-fixed": "#1b1c1c",
+                "primary-fixed-dim": "#51dad0",
+                "outline": "#6c7a78",
+                "primary-fixed": "#72f7ec",
+                "primary-container": "#00b1a7"
+              },
+              fontFamily: {
+                "headline": ["Inter"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-background antialiased">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex flex-col py-6 px-4 z-50">
+<div class="mb-10 px-4">
+<h1 class="text-lg font-black text-teal-900 dark:text-white tracking-tighter">Bintang Emerald</h1>
+<p class="text-xs text-slate-500 font-medium uppercase tracking-widest">Management Suite</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-sans text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">domain</span>
+<span class="font-sans text-sm font-medium">Properties</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-teal-700 dark:text-teal-400 bg-teal-50/50 dark:bg-teal-900/20 rounded-lg border-r-4 border-teal-600 cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">contact_page</span>
+<span class="font-sans text-sm font-medium">Leads</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="font-sans text-sm font-medium">Content</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-sans text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto space-y-4">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-3 px-4 rounded-md font-semibold text-sm shadow-md hover:shadow-lg transition-all active:scale-95">
+                Add New Listing
+            </button>
+<div class="pt-4 border-t border-slate-200 dark:border-slate-800 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 text-sm hover:text-teal-600 transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">help</span>
+<span>Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 text-sm hover:text-error transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-40 bg-white/70 dark:bg-slate-900/70 backdrop-blur-3xl border-b border-slate-100 dark:border-slate-800 shadow-sm dark:shadow-none flex items-center justify-between px-8 h-16">
+<div class="flex items-center gap-6 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search inquiries, names, or properties..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-white"></span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors">
+<span class="material-symbols-outlined">apps</span>
+</button>
+<div class="h-8 w-px bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-teal-900">Admin User</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-tighter">Bintang Group</p>
+</div>
+<img alt="Administrator Profile" class="w-10 h-10 rounded-full object-cover border-2 border-primary-container/20" data-alt="professional headshot of a business executive in a sharp suit with a confident smile against a neutral office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrj0yk-FTLNzJYqaGokTX5bVgRfZAEXIaHpGgALsckQARieIU1N6CLRWX8wopENHw1RZTgMLG_T1UffupkjombMxAy_LS4qhhMpkTcHKVdYQ8SBKVq_VG0ZJ9_jG5P4F66mOz_AMjf3HhQ4Js53-cgWeCwoH11qaYfLMs65wyFhqoW1CgI_yS7A3R9xbpKEU6bbOVjNahVbDd8Oc274-gAeZoBUPhB6G0P0vaTrijbXRhoG8Y7GlOdb3CPGCUDGrYx0qIUz4R2oIY"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-8 space-y-8">
+<!-- Hero / Header Section -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h2 class="text-4xl font-black text-on-background tracking-tight">Leads &amp; Inquiries</h2>
+<p class="text-secondary mt-2 max-w-xl">Manage your architectural prospects and property inquiries. Convert high-intent leads into successful transactions through our editorial management suite.</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-highest px-6 py-2.5 rounded-md text-sm font-semibold flex items-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                        Filter View
+                    </button>
+<button class="bg-primary px-6 py-2.5 rounded-md text-sm font-semibold text-white flex items-center gap-2 shadow-lg shadow-primary/20 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-lg">download</span>
+                        Export Report
+                    </button>
+</div>
+</section>
+<!-- Stats Overview - Subtle Bento Style -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-surface-container-low p-6 rounded-full flex flex-col justify-between">
+<span class="text-xs font-bold uppercase tracking-widest text-secondary">Total Inquiries</span>
+<div class="flex items-baseline gap-2 mt-4">
+<span class="text-3xl font-black text-primary">1,284</span>
+<span class="text-xs text-teal-600 font-bold">+12%</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-full flex flex-col justify-between">
+<span class="text-xs font-bold uppercase tracking-widest text-secondary">New Today</span>
+<div class="flex items-baseline gap-2 mt-4">
+<span class="text-3xl font-black text-on-background">48</span>
+<span class="material-symbols-outlined text-primary text-sm">trending_up</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-full flex flex-col justify-between">
+<span class="text-xs font-bold uppercase tracking-widest text-secondary">Conversion Rate</span>
+<div class="flex items-baseline gap-2 mt-4">
+<span class="text-3xl font-black text-on-background">3.2%</span>
+<span class="text-xs text-slate-400 font-medium">Global Avg</span>
+</div>
+</div>
+<div class="bg-primary text-white p-6 rounded-full flex flex-col justify-between">
+<span class="text-xs font-bold uppercase tracking-widest opacity-80">Pending Tasks</span>
+<div class="flex items-baseline gap-2 mt-4">
+<span class="text-3xl font-black">12</span>
+<span class="material-symbols-outlined text-white text-sm">priority_high</span>
+</div>
+</div>
+</section>
+<!-- Lead Management Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-secondary">Prospect Name</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-secondary">Contact Information</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-secondary">Property Interest</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-secondary">Date Received</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-secondary">Status</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-secondary text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-800 font-bold text-xs">AM</div>
+<div>
+<p class="font-bold text-on-background">Alexander Mercer</p>
+<p class="text-xs text-secondary">Individual Investor</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm text-on-background">a.mercer@gmail.com</p>
+<p class="text-xs text-secondary">+1 (555) 012-3456</p>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<img alt="The Emerald Villa" class="w-8 h-8 rounded-lg object-cover" data-alt="luxury modern villa with floor-to-ceiling windows and a sleek swimming pool at dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq0ioT6AikQcuH8gu748akH-5wtbO5m7xbxyiSg96XufI1ff46XdjwPp5wuGast0NzCxQIKrXnmZYfx4bav4DUWwHM9ARcR2RNiNs9j9VTQMRphu84QuJTQhHYXDlKIl8t3B4DKctsmFxoqpfHPm0ZiBVzFZZlp7_MSrG-xeEOZe9nsCLk4SBuDUly0rgaEu6f_5JTxSKuFS9nYCTw5N4JgTwc6UFFu9_NpbMzY-H3b_QUB4lPJKGk7-fbnLkrOWD19HxOPo3rALg"/>
+<p class="text-sm font-medium text-on-background">Emerald Horizon Villa</p>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-secondary">Oct 24, 2023</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-teal-100 text-teal-800 uppercase tracking-tighter">
+<span class="w-1.5 h-1.5 rounded-full bg-teal-600 mr-1.5"></span>
+                                        New
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-primary hover:bg-teal-50 rounded-lg transition-all" title="View Details">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-2 text-secondary hover:bg-slate-100 rounded-lg transition-all" title="Update Status">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 font-bold text-xs">SC</div>
+<div>
+<p class="font-bold text-on-background">Sarah Chen</p>
+<p class="text-xs text-secondary">First-time Buyer</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm text-on-background">sarah.c@lifestyle.com</p>
+<p class="text-xs text-secondary">+1 (555) 987-6543</p>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<img alt="The Skyline Penthouse" class="w-8 h-8 rounded-lg object-cover" data-alt="high-angle architectural view of a modern skyscraper penthouse with expansive glass walls and city views" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8lZAU5zyAsUrl0tah-le50treaPp182f_CQx-DT6-vP1BtcZzLJ_443-BdYDQ6nnMtCmKMFdYpoM8-D-zJ2AYo8GJyk5m16TCnN9o5XXkG686CLkF1cIhsC6ua4yAYLLTG1K3g5Km0f_YE9YRFnhBbZqXh8-BZAai9jcV1uBcWQiVb7sjXmWiKCSBeRQx7EF2WhdvKgUOzUJJY5a20150EzSkmyBukbBoTLMAOAK6R8SRoaC2OoAFXk6WcnqFgUlIiK4p_ZWv9yw"/>
+<p class="text-sm font-medium text-on-background">Azure Heights Suite</p>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-secondary">Oct 23, 2023</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800 uppercase tracking-tighter">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-600 mr-1.5"></span>
+                                        Contacted
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-primary hover:bg-teal-50 rounded-lg transition-all">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-2 text-secondary hover:bg-slate-100 rounded-lg transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-800 font-bold text-xs">JR</div>
+<div>
+<p class="font-bold text-on-background">Julian Ross</p>
+<p class="text-xs text-secondary">Corporate Account</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm text-on-background">julian@techcorp.io</p>
+<p class="text-xs text-secondary">+1 (555) 234-5678</p>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<img alt="The Brutalist Studio" class="w-8 h-8 rounded-lg object-cover" data-alt="minimalist brutalist concrete house facade with sharp geometric lines and soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8zzJmiIpL-8iueidkqoKqO3XrSkEMMalIumh9i5q-6OecofoPo-8tWFiVawsidkvResOv4HOi7B2xyX1AuP9-b25_xGOPv6lcBE1Ii5wy5csLekbDRSq8dp-P78zWdz1SD-HrXgug0qqjtf7YiB98fc0r9qfY2jz6KSD7UYRuVqogkf3n1StcG9IIjQKcytIC8Anrwi7k4jQZ1trQ2ct-OdwHX1ygOOfBzsqPOvkWJ-wEG7qXdjxFCRN01nZZqQa1TIT4Md20guk"/>
+<p class="text-sm font-medium text-on-background">The Concrete Loft</p>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-secondary">Oct 20, 2023</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-800 uppercase tracking-tighter">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600 mr-1.5"></span>
+                                        Sold
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-primary hover:bg-teal-50 rounded-lg transition-all">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-2 text-secondary hover:bg-slate-100 rounded-lg transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-800 font-bold text-xs">EL</div>
+<div>
+<p class="font-bold text-on-background">Elena Laurent</p>
+<p class="text-xs text-secondary">Referral Lead</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-sm text-on-background">e.laurent@luxury-estates.fr</p>
+<p class="text-xs text-secondary">+33 6 12 34 56 78</p>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<img alt="The Riviera Retreat" class="w-8 h-8 rounded-lg object-cover" data-alt="stunning mediterranean mansion with white stucco walls and lush bougainvillea overlooking a turquoise sea" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsNxdhs2aUV7DoGuBEY813Rp1bSWEUuphEK2QhzgLbVIezFiLc279a99zW2vTnrPhGOiYteCvyMwX3xZ9hgOrL-RWQpBlrOL5_fnLkxh-6_plMXadsrGuB1TzBtQExfbqlLcXWEkmnx8Xf1R6ngDgmq8QIhDer0YFjGNMu3D6nNmwYQRTuuSVjwg-NYQ58sn2vkEkpRfKp0-Rzze9uCAZM78BEBWppntGfkan6kbggaIUoY4EztAlqv5ZqebKaUP3QJEOGTKl0fug"/>
+<p class="text-sm font-medium text-on-background">Riviera Classic Estate</p>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-secondary">Oct 18, 2023</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-800 uppercase tracking-tighter">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400 mr-1.5"></span>
+                                        In Progress
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-primary hover:bg-teal-50 rounded-lg transition-all">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-2 text-secondary hover:bg-slate-100 rounded-lg transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 bg-surface-container-low flex items-center justify-between">
+<p class="text-xs font-medium text-secondary">Showing 1 to 4 of 1,284 leads</p>
+<div class="flex gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white transition-colors text-secondary">
+<span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white text-xs font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white transition-colors text-xs text-secondary font-bold">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white transition-colors text-xs text-secondary font-bold">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white transition-colors text-secondary">
+<span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bottom Asymmetric Section: Lead Sources & Insights -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Chart Area Placeholder -->
+<div class="lg:col-span-2 bg-surface-container-low p-8 rounded-xl relative overflow-hidden group">
+<div class="relative z-10">
+<h3 class="text-xl font-black text-on-background">Inquiry Trends</h3>
+<p class="text-sm text-secondary mt-1">Volume tracking for the current fiscal quarter.</p>
+<!-- Visual representation of a chart using bars -->
+<div class="mt-10 flex items-end gap-4 h-32">
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[40%] group-hover:h-[45%] transition-all duration-500"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[60%] group-hover:h-[65%] transition-all duration-500 delay-75"></div>
+<div class="flex-1 bg-primary rounded-t-lg h-[90%] group-hover:h-[95%] transition-all duration-500 delay-150"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[50%] group-hover:h-[55%] transition-all duration-500 delay-200"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[70%] group-hover:h-[75%] transition-all duration-500 delay-300"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[30%] group-hover:h-[35%] transition-all duration-500 delay-400"></div>
+</div>
+<div class="mt-4 flex justify-between text-[10px] font-bold text-secondary uppercase tracking-widest">
+<span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+</div>
+</div>
+<!-- Decorative Element -->
+<div class="absolute -right-10 -bottom-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl"></div>
+</div>
+<!-- Secondary Insight Card -->
+<div class="bg-surface-container-high p-8 rounded-xl flex flex-col justify-between border-l-4 border-primary">
+<div>
+<span class="material-symbols-outlined text-primary text-3xl mb-4">insights</span>
+<h3 class="text-lg font-bold text-on-background">Automated Follow-up</h3>
+<p class="text-sm text-secondary mt-2 leading-relaxed">Our AI-driven curator has automatically engaged 12 new leads today using the editorial template series.</p>
+</div>
+<button class="mt-6 text-sm font-bold text-primary flex items-center gap-1 group">
+                        Configure Automation
+                        <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+</button>
+</div>
+</section>
+</div>
+<!-- Footer Tonal Shift -->
+<footer class="mt-12 bg-surface-container border-t border-slate-100 py-8 px-8 flex justify-between items-center">
+<p class="text-xs text-secondary font-medium">© 2023 Bintang Property Group. All Rights Reserved.</p>
+<div class="flex gap-6">
+<a class="text-xs text-secondary hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-xs text-secondary hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-xs text-secondary hover:text-primary transition-colors" href="#">Contact Support</a>
+</div>
+</footer>
+</main>
+</body></html>
