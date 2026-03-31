@@ -4,7 +4,7 @@
   "type": "project",
   "scripts": {
     "vercel": [
-      "composer install -d perumahan-web --no-dev --prefer-dist --optimize-autoloader --no-interaction"
+      "composer install -d ../perumahan-web --no-dev --prefer-dist --optimize-autoloader --no-interaction"
     ]
   }
 }
