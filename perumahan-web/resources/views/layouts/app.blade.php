@@ -23,7 +23,7 @@
         $manifestPath = public_path('build/manifest.json');
     @endphp
     @if (file_exists($cssStable))
-        <link rel="stylesheet" href="{{ url('/build/assets/app.css') }}"/>
+        <style>{!! file_get_contents($cssStable) !!}</style>
     @elseif (file_exists($manifestPath))
         @php $m = json_decode(file_get_contents($manifestPath), true); @endphp
         @if(isset($m['resources/css/app.css']['file']))
