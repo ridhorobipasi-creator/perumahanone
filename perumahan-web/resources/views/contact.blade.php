@@ -1,145 +1,123 @@
 @extends('layouts.app')
 
-@section('title', 'Kontak | Architectural Curator')
+@section('title', 'Kontak | Bintang Emerald')
 
 @section('content')
-<main class="pt-32">
-    <!-- Hero Section -->
-    <section class="px-8 mb-24 max-w-screen-2xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
-            <div class="lg:col-span-7">
-                <span class="inline-block px-3 py-1 bg-primary-container text-on-primary-container text-[10px] font-bold uppercase tracking-[0.2em] rounded-sm mb-6">
-                    Hubungi Kami
-                </span>
-                <h1 class="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] text-on-surface mb-8">
-                    Mari bangun <br/> <span class="text-primary">warisan</span> Anda bersama.
-                </h1>
-            </div>
-            <div class="lg:col-span-5 pb-4">
-                <p class="text-xl text-on-surface-variant leading-relaxed font-light max-w-md">
-                    Baik Anda ingin mengakuisisi mahakarya atau mengkurasi portofolio Anda saat ini, pintu kami selalu terbuka untuk percakapan visioner.
-                </p>
-            </div>
-        </div>
-    </section>
+<!-- Contact Hero -->
+<section class="bg-slate-900 pt-32 pb-24 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#10b981 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <div class="max-w-screen-xl mx-auto px-8 relative z-10 text-center">
+        <span class="inline-block py-1 px-3 rounded-full bg-emerald-500/20 text-emerald-300 text-sm font-bold tracking-widest uppercase mb-6 border border-emerald-500/30">Hubungi Kami</span>
+        <h1 class="text-white text-5xl md:text-7xl font-black tracking-tighter mb-6 leading-tight">Mari Wujudkan<br/>Hunian Impian Anda</h1>
+        <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">Tim spesialis properti kami siap membantu Anda menemukan aset terbaik di Sumatera Utara dengan layanan personal.</p>
+    </div>
+</section>
 
-    <!-- Contact & Form Section -->
-    <section class="bg-surface-container-low py-24 px-8">
-        <div class="max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24">
-            <!-- Contact Info Column -->
-            <div class="space-y-16">
-                <div>
-                    <h2 class="text-3xl font-bold tracking-tight mb-8">Kantor Kuratorial</h2>
-                    <div class="space-y-6">
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-secondary">
-                                <span class="material-symbols-outlined">location_on</span>
-                            </div>
-                            <div>
-                                <p class="text-sm font-bold uppercase tracking-widest text-secondary mb-1">Alamat</p>
-                                <p class="text-lg text-on-surface">Jl. Diponegoro No. 428, Madras Hulu<br/>Medan, Sumatera Utara 20152</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-secondary">
-                                <span class="material-symbols-outlined">call</span>
-                            </div>
-                            <div>
-                                <p class="text-sm font-bold uppercase tracking-widest text-secondary mb-1">Kontak</p>
-                                <p class="text-lg text-on-surface">+62 61 7946 0123<br/>concierge@archcurator.com</p>
-                            </div>
-                        </div>
+<!-- Contact Form & Info -->
+<section class="py-24 bg-slate-50 -mt-10 relative z-20 rounded-t-[3rem]">
+    <div class="max-w-screen-xl mx-auto px-8">
+        <div class="flex flex-col lg:flex-row gap-16">
+            <!-- Info Cards -->
+            <div class="lg:w-1/3 space-y-6">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-emerald-500 transition-colors">
+                    <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 mb-6">
+                        <span class="material-symbols-outlined">location_on</span>
                     </div>
+                    <h3 class="text-xl font-black tracking-tight text-slate-900 mb-2">Kantor Pusat</h3>
+                    <p class="text-slate-600 leading-relaxed mb-4">Jl. Jend. Sudirman No. 123<br/>Medan, Sumatera Utara 20112</p>
+                    <a href="#" class="text-sm font-bold uppercase tracking-widest text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+                        Lihat Peta <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </a>
                 </div>
 
-                <!-- Consultation Highlight -->
-                <div class="bg-primary p-12 rounded-xl text-on-primary relative overflow-hidden">
-                    <div class="relative z-10">
-                        <h3 class="text-2xl font-bold mb-4 italic">Konsultasi Utama</h3>
-                        <p class="text-primary-fixed/80 mb-8 max-w-sm leading-relaxed">
-                            Nikmati panduan khusus melalui portofolio eksklusif kami bersama kurator yang berdedikasi. Konsultasi awal tidak dipungut biaya.
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-emerald-500 transition-colors">
+                    <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 mb-6">
+                        <span class="material-symbols-outlined">call</span>
+                    </div>
+                    <h3 class="text-xl font-black tracking-tight text-slate-900 mb-2">Kontak Langsung</h3>
+                    <div class="space-y-3">
+                        <p class="flex items-center gap-3 text-slate-600">
+                            <span class="material-symbols-outlined text-slate-400 text-sm">phone</span> +62 61 4567 890
                         </p>
-                        <button class="flex items-center gap-3 font-bold uppercase tracking-widest text-sm border-b-2 border-primary-container pb-1 hover:text-primary-container transition-colors">
-                            Konsultasi Gratis <span class="material-symbols-outlined">arrow_forward</span>
-                        </button>
-                    </div>
-                    <!-- Decorative element -->
-                    <div class="absolute -right-16 -bottom-16 w-64 h-64 border-[32px] border-primary-container/20 rounded-full"></div>
-                </div>
-
-                <!-- Social Links -->
-                <div>
-                    <p class="text-sm font-bold uppercase tracking-widest text-secondary mb-6">Hubungkan Dengan Kami</p>
-                    <div class="flex gap-6">
-                        <a class="text-on-surface hover:text-primary transition-colors font-medium" href="#">Instagram</a>
-                        <a class="text-on-surface hover:text-primary transition-colors font-medium" href="#">LinkedIn</a>
-                        <a class="text-on-surface hover:text-primary transition-colors font-medium" href="#">Pinterest</a>
-                        <a class="text-on-surface hover:text-primary transition-colors font-medium" href="#">X.com</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Form Column -->
-            <div class="bg-surface-container-lowest p-12 rounded-xl shadow-2xl shadow-on-surface/5">
-                <h3 class="text-2xl font-bold mb-8">Kirim Pertanyaan</h3>
-                <form action="#" class="space-y-8">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="space-y-2">
-                            <label class="text-[10px] font-bold uppercase tracking-widest text-secondary" for="name">Nama Lengkap</label>
-                            <input class="w-full bg-transparent border-0 border-b border-outline-variant/30 focus:ring-0 focus:border-primary px-0 py-3 text-on-surface placeholder:text-outline-variant transition-all" id="name" placeholder="Johnathan Doe" type="text"/>
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-[10px] font-bold uppercase tracking-widest text-secondary" for="phone">Nomor Telepon</label>
-                            <input class="w-full bg-transparent border-0 border-b border-outline-variant/30 focus:ring-0 focus:border-primary px-0 py-3 text-on-surface placeholder:text-outline-variant transition-all" id="phone" placeholder="+62 812 0000 0000" type="tel"/>
-                        </div>
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-bold uppercase tracking-widest text-secondary" for="email">Alamat Email</label>
-                        <input class="w-full bg-transparent border-0 border-b border-outline-variant/30 focus:ring-0 focus:border-primary px-0 py-3 text-on-surface placeholder:text-outline-variant transition-all" id="email" placeholder="john@example.com" type="email"/>
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-bold uppercase tracking-widest text-secondary" for="message">Pesan Anda</label>
-                        <textarea class="w-full bg-transparent border-0 border-b border-outline-variant/30 focus:ring-0 focus:border-primary px-0 py-3 text-on-surface placeholder:text-outline-variant transition-all resize-none" id="message" placeholder="Ceritakan tentang properti atau proyek yang Anda minati..." rows="4"></textarea>
-                    </div>
-                    <div class="pt-4">
-                        <button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary py-5 rounded-md font-bold uppercase tracking-widest text-sm hover:opacity-90 transition-all flex items-center justify-center gap-4" type="submit">
-                            Minta Telepon Balik Gratis
-                            <span class="material-symbols-outlined">call</span>
-                        </button>
-                        <p class="text-center text-[10px] text-secondary mt-4 uppercase tracking-tighter">
-                            Waktu respons: biasanya dalam 2 jam kerja
+                        <p class="flex items-center gap-3 text-slate-600">
+                            <span class="material-symbols-outlined text-slate-400 text-sm">chat</span> +62 812 0000 0000 (WA)
+                        </p>
+                        <p class="flex items-center gap-3 text-slate-600">
+                            <span class="material-symbols-outlined text-slate-400 text-sm">mail</span> hello@bintang-emerald.co.id
                         </p>
                     </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-emerald-500 transition-colors">
+                    <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 mb-6">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <h3 class="text-xl font-black tracking-tight text-slate-900 mb-2">Jam Operasional</h3>
+                    <p class="text-slate-600 leading-relaxed">Senin - Jumat: 08.00 - 17.00<br/>Sabtu - Minggu: 09.00 - 15.00</p>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="lg:w-2/3 bg-white p-10 md:p-12 rounded-3xl shadow-xl border border-slate-100">
+                <h2 class="text-3xl font-black tracking-tighter text-slate-900 mb-2">Kirim Pesan</h2>
+                <p class="text-slate-500 mb-10">Isi formulir di bawah dan tim kami akan segera menghubungi Anda kembali.</p>
+                
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase tracking-widest text-slate-600">Nama Lengkap</label>
+                            <input class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all" placeholder="John Doe" type="text"/>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase tracking-widest text-slate-600">Nomor Telepon</label>
+                            <input class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all" placeholder="0812-XXXX-XXXX" type="tel"/>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-600">Alamat Email</label>
+                        <input class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all" placeholder="john@example.com" type="email"/>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-600">Topik Konsultasi</label>
+                        <select class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all cursor-pointer">
+                            <option>Pilih topik...</option>
+                            <option>Informasi Proyek Baru</option>
+                            <option>Kunjungan Lokasi / Show Unit</option>
+                            <option>Simulasi KPR & Pembiayaan</option>
+                            <option>Kerjasama & Investasi</option>
+                            <option>Lainnya</option>
+                        </select>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-600">Pesan Anda</label>
+                        <textarea class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all min-h-[150px] resize-y" placeholder="Jelaskan kebutuhan Anda secara detail..."></textarea>
+                    </div>
+                    
+                    <button class="w-full bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl font-bold uppercase tracking-wider text-sm transition-all shadow-lg shadow-emerald-600/30">
+                        Kirim Pesan Sekarang
+                    </button>
                 </form>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Map Section -->
-    <section class="w-full h-[600px] relative">
-        <div class="absolute inset-0 bg-surface-dim overflow-hidden grayscale contrast-125 opacity-60">
-            <img alt="Peta minimalis Medan" class="w-full h-full object-cover" data-alt="Modern clean architectural map style of Medan city streets with minimalist teal and white color scheme and soft shadows" data-location="Medan, North Sumatra" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDlP1PQSAvqt0RpifsOtNCf28rWnsfPBlwfvFfbuOxMvVu69Y8DDYiAPjFa4mkF56hQNi0Ft4t6MUIsIjE1ZTaRsAv_mQXfHhxZfpGAO-V12r2kNfuQUbi7PAoK1Js1C6vQ3iaa59lwgZ35hQ5OS41XGlvRa40PTBRfFkIxzHQDbN3VcaFkgpsztC-mu4EKPMkIupZLT52eSML1zflRgQiEsn4iWdMjlyGef0rbf0_anYiXjcM44mEm5gj0Gsz_VlvA5i8LIbfudk" loading="lazy" decoding="async"/>
-        </div>
-        <!-- Interactive Floating Card -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <div class="bg-white p-6 rounded-xl shadow-2xl flex items-center gap-6 max-w-sm border border-outline-variant/10">
-                <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                    <img alt="Gedung kantor Medan" class="w-full h-full object-cover" data-alt="High-end modern glass skyscraper office building in Medan with architectural sharp angles and blue sky reflection" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZM-7lK68eEwkKNnyanAsvCJIlN6NPOdahsZxDGBaoeQo2816qFixo9VkwVZICoucfZbv7Q9c-A66ijeaTO2BRECCnjaFbmuWcNlNFDa816F6YjsXrSyCNvm2F5y1-IvptDVWaI7D1sdTIqswPeGtfApNuaM_UPnkCsbFhZoRr7d-C7g4xpnu0CkSI3bkW5fufunsS6GOtEsXmyV8BQN3wZbNU2R_V1ydY-DkoAhTC4JmF3rD0x15UE1wh0DFWNNX1wVIcg5rDR3o" loading="lazy" decoding="async"/>
-                </div>
-                <div>
-                    <h4 class="font-bold text-on-surface">Galeri Utama Medan</h4>
-                    <p class="text-xs text-on-surface-variant mb-2">Buka Sen-Sab: 09:00 - 18:00</p>
-                    <a class="text-primary text-xs font-bold uppercase tracking-widest flex items-center gap-1" href="#">
-                        Dapatkan Petunjuk <span class="material-symbols-outlined text-[14px]">open_in_new</span>
-                    </a>
+<!-- Simple Map Component -->
+<section class="pb-24 bg-slate-50">
+    <div class="max-w-screen-xl mx-auto px-8">
+        <div class="bg-slate-200 w-full h-[400px] rounded-3xl overflow-hidden relative border border-slate-200 flex items-center justify-center">
+            <!-- Placeholder for actual map embed -->
+            <div class="absolute inset-0 bg-slate-200 opacity-50" style="background-image: repeating-linear-gradient(45deg, #cbd5e1 25%, transparent 25%, transparent 75%, #cbd5e1 75%, #cbd5e1), repeating-linear-gradient(45deg, #cbd5e1 25%, #e2e8f0 25%, #e2e8f0 75%, #cbd5e1 75%, #cbd5e1); background-position: 0 0, 10px 10px; background-size: 20px 20px;"></div>
+            <div class="relative z-10 flex flex-col items-center">
+                <span class="material-symbols-outlined text-emerald-600 text-5xl drop-shadow-md mb-2">location_on</span>
+                <div class="bg-white px-4 py-2 rounded-lg shadow-md font-bold text-slate-900 text-sm">
+                    Bintang Property Group HQ
                 </div>
             </div>
-            <!-- Pin marker -->
-            <div class="mt-4 flex flex-col items-center">
-                <div class="w-4 h-4 bg-primary rounded-full border-4 border-white shadow-lg"></div>
-                <div class="w-0.5 h-8 bg-gradient-to-b from-primary to-transparent"></div>
-            </div>
         </div>
-    </section>
-</main>
+    </div>
+</section>
 @endsection
