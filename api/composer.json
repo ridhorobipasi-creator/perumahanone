@@ -4,13 +4,13 @@
   "type": "project",
   "scripts": {
     "vercel": [
-      "composer install -d ../perumahan-web --no-dev --prefer-dist --optimize-autoloader --no-interaction"
+      "sh -lc 'mkdir -p ../perumahan-web/bootstrap/cache && chmod -R 0777 ../perumahan-web/bootstrap/cache && composer install -d ../perumahan-web --no-dev --prefer-dist --optimize-autoloader --no-interaction'"
     ],
     "post-install-cmd": [
-      "composer install -d ../perumahan-web --no-dev --prefer-dist --optimize-autoloader --no-interaction"
+      "sh -lc 'mkdir -p ../perumahan-web/bootstrap/cache && chmod -R 0777 ../perumahan-web/bootstrap/cache && composer install -d ../perumahan-web --no-dev --prefer-dist --optimize-autoloader --no-interaction'"
     ],
     "post-update-cmd": [
-      "composer install -d ../perumahan-web --no-dev --prefer-dist --optimize-autoloader --no-interaction"
+      "sh -lc 'mkdir -p ../perumahan-web/bootstrap/cache && chmod -R 0777 ../perumahan-web/bootstrap/cache && composer install -d ../perumahan-web --no-dev --prefer-dist --optimize-autoloader --no-interaction'"
     ]
   }
 }
