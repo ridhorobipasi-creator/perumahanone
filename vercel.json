@@ -4,8 +4,10 @@
   "outputDirectory": "perumahan-web/public",
   "functions": {
     "api/index.php": {
-      "runtime": "vercel-php@0.7.2",
-      "includeFiles": "perumahan-web/**"
+      "runtime": "vercel-php@0.9.0",
+      "includeFiles": [
+        "perumahan-web/**"
+      ]
     }
   },
   "routes": [
