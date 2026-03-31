@@ -8,7 +8,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @php
+        $manifestPath = public_path('build/manifest.json');
+    @endphp
+    @if (file_exists($manifestPath))
+        @php $m = json_decode(file_get_contents($manifestPath), true); @endphp
+        @if(isset($m['resources/css/app.css']['file']))
+            <link rel="stylesheet" href="{{ url('/build/'.$m['resources/css/app.css']['file']) }}"/>
+        @endif
+        @if(isset($m['resources/js/app.js']['file']))
+            <script type="module" src="{{ url('/build/'.$m['resources/js/app.js']['file']) }}" defer></script>
+        @endif
+    @else
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @endif
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(24px); }
