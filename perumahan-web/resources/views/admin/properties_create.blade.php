@@ -3,231 +3,298 @@
 @section('title', 'Tambah Properti Baru | Admin Bintang')
 
 @section('content')
-<div class="p-8">
-    <!-- Breadcrumbs & Header -->
-    <div class="mb-10">
-        <nav class="flex gap-2 text-[11px] font-bold text-slate-400 mb-3 uppercase tracking-widest">
-            <a class="hover:text-primary transition-colors" href="{{ url('/admin') }}">Dasbor</a>
-            <span>/</span>
-            <a class="hover:text-primary transition-colors" href="{{ url('/admin/properties') }}">Manajemen Properti</a>
-            <span>/</span>
-            <span class="text-primary-container">Tambah Baru</span>
-        </nav>
-        <div class="flex items-center justify-between">
-            <div>
-                <h2 class="text-3xl font-black text-on-background tracking-tight">Formulir Listing Properti</h2>
-                <p class="text-secondary mt-1 font-medium text-sm">Tambahkan data aset baru yang komprehensif untuk disajikan ke pasar.</p>
-            </div>
-            <div class="flex gap-3">
-                <a href="{{ url('/admin/properties') }}" class="px-6 py-2.5 rounded-lg text-sm font-bold text-secondary bg-surface-container-highest hover:bg-surface-container-high transition-colors">
-                    Batal
-                </a>
-                <button type="submit" form="createPropertyForm" class="px-6 py-2.5 rounded-lg text-sm font-bold text-white bg-primary shadow-lg shadow-primary/20 hover:opacity-90 transition-opacity flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[18px]">publish</span> Publikasi Aset
-                </button>
-            </div>
+<style>
+    .create-page { padding: 2.5rem; max-width: 1200px; }
+    .create-breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
+    .create-breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+    .create-breadcrumb a:hover { color: var(--accent); }
+    .create-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem; }
+    .create-title { font-size: 2rem; font-weight: 800; color: var(--text); margin-bottom: 0.375rem; }
+    .create-sub { font-size: 0.875rem; color: var(--text-muted); max-width: 500px; line-height: 1.7; }
+    .create-actions { display: flex; gap: 0.75rem; }
+    .btn-cancel-create { padding: 0.75rem 1.5rem; background: var(--border2); border: 1px solid var(--border); border-radius: 12px; color: var(--text-muted); font-size: 0.78rem; font-weight: 700; text-decoration: none; transition: all 0.15s; }
+    .btn-cancel-create:hover { color: var(--text); border-color: var(--border-hover); }
+    .btn-publish { padding: 0.75rem 2rem; background: var(--accent); color: var(--accent-dark); border: none; border-radius: 12px; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: background 0.15s, transform 0.15s; }
+    .btn-publish:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+    /* Error alert */
+    .error-alert { background: var(--error-dim); border: 1px solid var(--error); border-radius: 14px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; color: var(--error); font-size: 0.82rem; font-weight: 700; }
+    .error-alert ul { padding-left: 1.25rem; }
+
+    /* Form Grid */
+    .form-layout { display: grid; grid-template-columns: 1fr 340px; gap: 2rem; }
+    .form-section { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; margin-bottom: 1.5rem; }
+    .form-section-title { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 1.75rem; display: flex; align-items: center; gap: 0.75rem; }
+    .form-section-title .material-symbols-rounded { color: var(--accent); }
+    .fg { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem; }
+    .fg:last-child { margin-bottom: 0; }
+    .fg-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
+    .fg-2 .fg { margin-bottom: 0; }
+    .fg-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+    .fg-4 .fg { margin-bottom: 0; }
+    .flabel { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-faint); }
+    .finput {
+        background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+        padding: 0.875rem 1rem; color: var(--text); font-size: 0.875rem;
+        font-family: inherit; outline: none; width: 100%; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .finput::placeholder { color: var(--text-faint); }
+    .finput:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
+    select.finput { cursor: pointer; }
+    textarea.finput { min-height: 110px; resize: vertical; }
+    .finput-icon-wrap { position: relative; }
+    .finput-icon-wrap .fi-icon { position: absolute; left: 0.875rem; top: 50%; transform: translateY(-50%); color: var(--accent); pointer-events: none; font-size: 18px; }
+    .finput-icon-wrap .finput { padding-left: 2.75rem; }
+    .finput-prefix { position: relative; }
+    .finput-prefix .f-prefix { position: absolute; left: 0.875rem; top: 50%; transform: translateY(-50%); font-size: 0.875rem; font-weight: 800; color: var(--accent); }
+    .finput-prefix .finput { padding-left: 2.75rem; }
+
+    /* Amenity chips */
+    .amenity-grid { display: flex; flex-wrap: wrap; gap: 0.625rem; }
+    .amenity-opt { display: none; }
+    .amenity-label { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 100px; background: var(--bg); cursor: pointer; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); transition: all 0.15s; }
+    .amenity-opt:checked + .amenity-label { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+    .amenity-label .material-symbols-rounded { font-size: 16px; }
+
+    /* Status radio */
+    .status-grid { display: flex; flex-direction: column; gap: 0.75rem; }
+    .status-opt { display: none; }
+    .status-label { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.125rem; border-radius: 14px; border: 1px solid var(--border); background: var(--bg); cursor: pointer; transition: all 0.15s; }
+    .status-label:hover { border-color: var(--border-hover); }
+    .status-opt:checked + .status-label { border-color: var(--accent); background: var(--accent-dim); }
+    .status-label-inner { display: flex; align-items: center; gap: 0.75rem; font-size: 0.875rem; font-weight: 700; color: var(--text); }
+    .status-label-inner .material-symbols-rounded { font-size: 18px; }
+    .status-opt:checked + .status-label .status-label-inner { color: var(--accent); }
+    .status-opt:checked + .status-label .status-label-inner .material-symbols-rounded {
+        font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .status-radio-circle { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border-hover); transition: all 0.15s; position: relative; flex-shrink: 0; }
+    .status-opt:checked + .status-label .status-radio-circle { border-color: var(--accent); background: var(--accent); }
+    .status-opt:checked + .status-label .status-radio-circle::after { content: ''; position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-dark); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+
+    /* Featured toggle */
+    .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.125rem; border-radius: 14px; border: 1px solid var(--border); background: var(--bg); margin-top: 0.75rem; }
+    .toggle-row-text h5 { font-size: 0.875rem; font-weight: 700; color: var(--text); }
+    .toggle-row-text p { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+    .toggle-switch { width: 44px; height: 24px; background: var(--border-hover); border-radius: 100px; position: relative; cursor: pointer; transition: background 0.2s; flex-shrink: 0; }
+    #featured-toggle:checked ~ .toggle-row .toggle-switch { background: var(--accent); }
+    .toggle-switch::after { content: ''; position: absolute; width: 18px; height: 18px; background: #fff; border-radius: 50%; top: 3px; left: 3px; transition: transform 0.2s; }
+
+    @media(max-width:1024px) { .form-layout { grid-template-columns: 1fr; } .fg-4 { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:640px) { .fg-2 { grid-template-columns: 1fr; } .create-page { padding: 1.5rem; } }
+</style>
+
+<div class="create-page">
+    <div class="create-header">
+        <div>
+            <nav class="create-breadcrumb">
+                <a href="{{ url('/admin') }}">Dasbor</a>
+                <span class="material-symbols-rounded" style="font-size:14px;">chevron_right</span>
+                <a href="{{ url('/admin/properties') }}">Manajemen Properti</a>
+                <span class="material-symbols-rounded" style="font-size:14px;">chevron_right</span>
+                <span style="color:var(--accent);">Tambah Baru</span>
+            </nav>
+            <div class="create-title">Formulir Listing Baru</div>
+            <div class="create-sub">Tambahkan aset baru yang komprehensif untuk dipresentasikan ke pasar.</div>
+        </div>
+        <div class="create-actions">
+            <a href="{{ url('/admin/properties') }}" class="btn-cancel-create">Batal</a>
+            <button type="submit" form="createPropertyForm" class="btn-publish">
+                <span class="material-symbols-rounded" style="font-size:18px;">publish</span>
+                Publikasi Aset
+            </button>
         </div>
     </div>
 
     @if ($errors->any())
-        <div class="mb-6 bg-error-container text-on-error-container p-4 rounded-xl">
-            <ul class="list-disc pl-5 text-sm font-bold">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+        <div class="error-alert">
+            <ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>
         </div>
     @endif
 
-    <!-- Main Form Grid -->
-    <form id="createPropertyForm" action="{{ url('/admin/properties') }}" method="POST" class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+    <form id="createPropertyForm" action="{{ url('/admin/properties') }}" method="POST">
         @csrf
-        
-        <!-- Left Section (Main Content 2 Columns Wide) -->
-        <div class="xl:col-span-2 space-y-8">
-            
-            <!-- Basic Information Card -->
-            <div class="bg-surface-container-lowest rounded-3xl p-8 border border-slate-100 shadow-[0_10px_30px_rgba(0,0,0,0.02)]">
-                <h3 class="text-lg font-black text-on-background flex items-center gap-2 mb-6">
-                    <span class="material-symbols-outlined text-primary" data-icon="edit_document">edit_document</span> Informasi Dasar
-                </h3>
-                
-                <div class="space-y-6">
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Nama Properti / Judul Listing</label>
-                        <input type="text" name="title" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors font-bold text-on-surface" placeholder="Cth: Cluster Emerald Premium (Tipe 120)">
+        <div class="form-layout">
+            <!-- Left -->
+            <div>
+                <div class="form-section">
+                    <div class="form-section-title">
+                        <span class="material-symbols-rounded">edit_document</span>Informasi Dasar
                     </div>
-
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Deskripsi Aset (Marketing Copy)</label>
-                        <textarea name="description" rows="5" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors leading-relaxed text-secondary" placeholder="Jelaskan nilai jual terbaik dari properti ini kepada calon pembeli..."></textarea>
+                    <div class="fg">
+                        <label class="flabel" for="title">Nama Properti / Judul Listing</label>
+                        <input id="title" class="finput" type="text" name="title" required placeholder="Cth: Cluster Emerald Premium (Tipe 120)">
                     </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-2">
-                            <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Kategori / Tipe Data</label>
-                            <select name="category" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors font-bold text-on-surface appearance-none">
+                    <div class="fg">
+                        <label class="flabel" for="description">Deskripsi Aset (Marketing Copy)</label>
+                        <textarea id="description" class="finput" name="description" rows="5" placeholder="Jelaskan nilai jual terbaik dari properti ini kepada calon pembeli..."></textarea>
+                    </div>
+                    <div class="fg-2">
+                        <div class="fg">
+                            <label class="flabel" for="category">Kategori / Tipe Aset</label>
+                            <select id="category" class="finput" name="category" required>
                                 <option value="Perumahan (Cluster)">Perumahan (Cluster)</option>
                                 <option value="Ruko / Komersial">Ruko / Komersial</option>
                                 <option value="Townhouse">Townhouse</option>
                                 <option value="Tanah Kavling Kosong">Tanah Kavling Kosong</option>
                             </select>
                         </div>
-                        <div class="space-y-2">
-                            <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Kode Unit / SKU Internal</label>
-                            <input type="text" name="sku" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors font-mono tracking-wider text-primary" placeholder="BNG-EM-120">
+                        <div class="fg">
+                            <label class="flabel" for="sku">Kode Unit / SKU Internal</label>
+                            <input id="sku" class="finput" type="text" name="sku" placeholder="BNG-EM-120" style="font-family:monospace;">
                         </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-section-title">
+                        <span class="material-symbols-rounded">architecture</span>Spesifikasi Bangunan
+                    </div>
+                    <div class="fg-4">
+                        <div class="fg">
+                            <label class="flabel" for="land_size">Luas Tanah (m²)</label>
+                            <div class="finput-icon-wrap">
+                                <span class="fi-icon material-symbols-rounded">straighten</span>
+                                <input id="land_size" class="finput" type="number" name="land_size" placeholder="150">
+                            </div>
+                        </div>
+                        <div class="fg">
+                            <label class="flabel" for="build_size">Luas Bangun (m²)</label>
+                            <div class="finput-icon-wrap">
+                                <span class="fi-icon material-symbols-rounded">square_foot</span>
+                                <input id="build_size" class="finput" type="number" name="build_size" placeholder="120">
+                            </div>
+                        </div>
+                        <div class="fg">
+                            <label class="flabel" for="bedrooms">Kamar Tidur</label>
+                            <div class="finput-icon-wrap">
+                                <span class="fi-icon material-symbols-rounded">bed</span>
+                                <input id="bedrooms" class="finput" type="number" name="bedrooms" placeholder="3">
+                            </div>
+                        </div>
+                        <div class="fg">
+                            <label class="flabel" for="bathrooms">Kamar Mandi</label>
+                            <div class="finput-icon-wrap">
+                                <span class="fi-icon material-symbols-rounded">bathtub</span>
+                                <input id="bathrooms" class="finput" type="number" name="bathrooms" placeholder="2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fg">
+                        <label class="flabel">Fasilitas Cluster</label>
+                        <div class="amenity-grid">
+                            <input class="amenity-opt" type="checkbox" id="am1" name="amenities[]" value="Carport / Garasi">
+                            <label class="amenity-label" for="am1"><span class="material-symbols-rounded">garage</span>Carport</label>
+                            <input class="amenity-opt" type="checkbox" id="am2" name="amenities[]" value="Taman Pribadi">
+                            <label class="amenity-label" for="am2"><span class="material-symbols-rounded">park</span>Taman</label>
+                            <input class="amenity-opt" type="checkbox" id="am3" name="amenities[]" value="Keamanan 24 Jam">
+                            <label class="amenity-label" for="am3"><span class="material-symbols-rounded">security</span>Security 24H</label>
+                            <input class="amenity-opt" type="checkbox" id="am4" name="amenities[]" value="Akses Kolam Renang">
+                            <label class="amenity-label" for="am4"><span class="material-symbols-rounded">pool</span>Kolam Renang</label>
+                            <input class="amenity-opt" type="checkbox" id="am5" name="amenities[]" value="Smart Home">
+                            <label class="amenity-label" for="am5"><span class="material-symbols-rounded">home_iot_device</span>Smart Home</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-section-title">
+                        <span class="material-symbols-rounded">location_on</span>Pemetaan & Lokasi
+                    </div>
+                    <div class="fg-2">
+                        <div class="fg">
+                            <label class="flabel" for="city">Kota / Kabupaten</label>
+                            <div class="finput-icon-wrap">
+                                <span class="fi-icon material-symbols-rounded">location_city</span>
+                                <input id="city" class="finput" type="text" name="city" placeholder="Kota Medan">
+                            </div>
+                        </div>
+                        <div class="fg">
+                            <label class="flabel" for="area">Kecamatan / Area</label>
+                            <div class="finput-icon-wrap">
+                                <span class="fi-icon material-symbols-rounded">map</span>
+                                <input id="area" class="finput" type="text" name="area" placeholder="Medan Johor">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fg">
+                        <label class="flabel" for="address">Alamat Lengkap</label>
+                        <textarea id="address" class="finput" name="address" rows="2" style="min-height:70px;" placeholder="Jalan Boulevard Raya No..."></textarea>
                     </div>
                 </div>
             </div>
 
-            <!-- Property Specifications -->
-            <div class="bg-surface-container-lowest rounded-3xl p-8 border border-slate-100 shadow-[0_10px_30px_rgba(0,0,0,0.02)]">
-                <h3 class="text-lg font-black text-on-background flex items-center gap-2 mb-6">
-                    <span class="material-symbols-outlined text-primary" data-icon="architecture">architecture</span> Spesifikasi Bangunan
-                </h3>
-                
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Luas Tanah (m²)</label>
-                        <div class="relative">
-                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]" data-icon="straighten">straighten</span>
-                            <input type="number" name="land_size" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 font-bold" placeholder="150">
+            <!-- Right Sidebar -->
+            <div>
+                <div class="form-section">
+                    <div class="form-section-title">
+                        <span class="material-symbols-rounded">sell</span>Harga & Status
+                    </div>
+                    <div class="fg">
+                        <label class="flabel" for="price">Harga Jual (IDR)</label>
+                        <div class="finput-prefix">
+                            <span class="f-prefix">Rp</span>
+                            <input id="price" class="finput" type="number" name="price" required placeholder="1450000000">
                         </div>
                     </div>
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Luas Bangun (m²)</label>
-                        <div class="relative">
-                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]" data-icon="square_foot">square_foot</span>
-                            <input type="number" name="build_size" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 font-bold" placeholder="120">
-                        </div>
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Kamar Tidur</label>
-                        <div class="relative">
-                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]" data-icon="bed">bed</span>
-                            <input type="number" name="bedrooms" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 font-bold" placeholder="3">
-                        </div>
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Kamar Mandi</label>
-                        <div class="relative">
-                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]" data-icon="bathtub">bathtub</span>
-                            <input type="number" name="bathrooms" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 font-bold" placeholder="2">
+                    <div class="fg" style="margin-bottom:0;">
+                        <label class="flabel">Status Ketersediaan</label>
+                        <div class="status-grid" style="margin-top:0.75rem;">
+                            <input class="status-opt" type="radio" name="status" id="s1" value="Tersedia" checked>
+                            <label class="status-label" for="s1">
+                                <div class="status-label-inner">
+                                    <span class="material-symbols-rounded">check_circle</span>Tersedia
+                                </div>
+                                <div class="status-radio-circle"></div>
+                            </label>
+                            <input class="status-opt" type="radio" name="status" id="s2" value="Terbooking">
+                            <label class="status-label" for="s2">
+                                <div class="status-label-inner">
+                                    <span class="material-symbols-rounded">book_online</span>Dipesan (Booking)
+                                </div>
+                                <div class="status-radio-circle"></div>
+                            </label>
+                            <input class="status-opt" type="radio" name="status" id="s3" value="Sold">
+                            <label class="status-label" for="s3">
+                                <div class="status-label-inner">
+                                    <span class="material-symbols-rounded">cancel</span>Habis Terjual
+                                </div>
+                                <div class="status-radio-circle"></div>
+                            </label>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-8 space-y-4">
-                    <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Fasilitas Tambahan</label>
-                    <div class="flex flex-wrap gap-3">
-                        <label class="flex items-center gap-2 bg-slate-50 px-4 py-2 border border-slate-200 rounded-lg cursor-pointer hover:bg-primary/5 transition-colors">
-                            <input type="checkbox" name="amenities[]" value="Carport / Garasi" class="rounded text-primary focus:ring-primary/40 border-slate-300">
-                            <span class="text-xs font-bold text-on-surface">Carport / Garasi</span>
-                        </label>
-                        <label class="flex items-center gap-2 bg-slate-50 px-4 py-2 border border-slate-200 rounded-lg cursor-pointer hover:bg-primary/5 transition-colors">
-                            <input type="checkbox" name="amenities[]" value="Taman Pribadi" class="rounded text-primary focus:ring-primary/40 border-slate-300">
-                            <span class="text-xs font-bold text-on-surface">Taman Pribadi</span>
-                        </label>
-                        <label class="flex items-center gap-2 bg-slate-50 px-4 py-2 border border-slate-200 rounded-lg cursor-pointer hover:bg-primary/5 transition-colors">
-                            <input type="checkbox" name="amenities[]" value="Keamanan 24 Jam" class="rounded text-primary focus:ring-primary/40 border-slate-300">
-                            <span class="text-xs font-bold text-on-surface">Keamanan 24 Jam (Cluster)</span>
-                        </label>
-                        <label class="flex items-center gap-2 bg-slate-50 px-4 py-2 border border-slate-200 rounded-lg cursor-pointer hover:bg-primary/5 transition-colors">
-                            <input type="checkbox" name="amenities[]" value="Akses Kolam Renang" class="rounded text-primary focus:ring-primary/40 border-slate-300">
-                            <span class="text-xs font-bold text-on-surface">Akses Kolam Renang</span>
+                <div class="form-section" style="padding:1.5rem;">
+                    <div class="toggle-row" style="padding:0;border:none;background:none;">
+                        <div class="toggle-row-text">
+                            <h5>Listing Unggulan</h5>
+                            <p>Tampilkan sebagai Hot Properti di halaman utama</p>
+                        </div>
+                        <label style="cursor:pointer;">
+                            <input id="featured-toggle" type="checkbox" name="is_featured" value="1" style="display:none;" onchange="this.parentElement.querySelector('.toggle-switch').style.background = this.checked ? 'var(--accent)' : ''; this.parentElement.querySelector('.toggle-knob').style.transform = this.checked ? 'translateX(20px)' : '';">
+                            <div class="toggle-switch">
+                                <div class="toggle-knob" style="position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:transform 0.2s;"></div>
+                            </div>
                         </label>
                     </div>
+                </div>
+
+                <div class="form-section" style="background:var(--gradient-card);border-color:var(--accent);">
+                    <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+                        <div style="width:36px;height:36px;border-radius:10px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0;">
+                            <span class="material-symbols-rounded">info</span>
+                        </div>
+                        <div style="font-size:0.875rem;font-weight:800;color:var(--text);">Panduan Listing</div>
+                    </div>
+                    <ul style="font-size:0.78rem;color:var(--text-muted);line-height:1.8;padding-left:1rem;">
+                        <li>Isi semua kolom yang bertanda * wajib</li>
+                        <li>Gunakan harga jual bersih tanpa pajak</li>
+                        <li>Deskripsi minimal 100 karakter untuk SEO</li>
+                        <li>Foto utama maks 5MB, format JPG/PNG</li>
+                    </ul>
                 </div>
             </div>
-            
-            <!-- Location Data -->
-            <div class="bg-surface-container-lowest rounded-3xl p-8 border border-slate-100 shadow-[0_10px_30px_rgba(0,0,0,0.02)]">
-                <h3 class="text-lg font-black text-on-background flex items-center gap-2 mb-6">
-                    <span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span> Pemetaan & Lokasi
-                </h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Kota / Kabupaten</label>
-                        <input type="text" name="city" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 font-bold" placeholder="Cth: Kota Medan">
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Kecamatan / Area</label>
-                        <input type="text" name="area" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 font-bold" placeholder="Cth: Medan Johor">
-                    </div>
-                </div>
-                <div class="space-y-2">
-                    <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Alamat Lengkap</label>
-                    <textarea name="address" rows="2" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 leading-relaxed font-medium" placeholder="Jalan Boulevard Raya No..."></textarea>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Right Section (Sidebar Content 1 Column) -->
-        <div class="xl:col-span-1 space-y-8">
-            
-            <!-- Pricing & Availability -->
-            <div class="bg-surface-container-lowest rounded-3xl p-8 border border-slate-100 shadow-[0_10px_30px_rgba(0,0,0,0.02)]">
-                <h3 class="text-lg font-black text-on-background flex items-center gap-2 mb-6">
-                    <span class="material-symbols-outlined text-primary" data-icon="sell">sell</span> Harga & Status
-                </h3>
-                
-                <div class="space-y-6">
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Harga Jual (IDR)</label>
-                        <div class="relative">
-                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-black text-primary">Rp</span>
-                            <input type="number" name="price" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-12 pr-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 font-black text-on-surface" placeholder="1450000000">
-                        </div>
-                    </div>
-
-                    <div class="space-y-4">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Status Ketersediaan Aset</label>
-                        
-                        <label class="flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all border-teal-200 bg-teal-50">
-                            <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-teal-600">check_circle</span>
-                                <span class="text-sm font-bold text-teal-900">Tersedia (Bisa Dijual)</span>
-                            </div>
-                            <input type="radio" name="status" value="Tersedia" checked class="text-teal-600 focus:ring-teal-500 w-4 h-4">
-                        </label>
-                        
-                        <label class="flex items-center justify-between p-4 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all">
-                            <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-amber-600">book_online</span>
-                                <span class="text-sm font-bold text-amber-900">Dipesan (Terbooking)</span>
-                            </div>
-                            <input type="radio" name="status" value="Terbooking" class="text-primary focus:ring-primary w-4 h-4">
-                        </label>
-                        
-                        <label class="flex items-center justify-between p-4 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all">
-                            <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-error">cancel</span>
-                                <span class="text-sm font-bold text-error">Habis Terjual (Sold)</span>
-                            </div>
-                            <input type="radio" name="status" value="Sold" class="text-primary focus:ring-primary w-4 h-4">
-                        </label>
-                    </div>
-
-                    <div class="pt-6 border-t border-slate-100">
-                        <label class="flex items-center gap-3">
-                            <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                                <input type="checkbox" name="is_featured" id="toggle" value="1" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer border-slate-300"/>
-                                <label for="toggle" class="toggle-label block overflow-hidden h-5 rounded-full bg-slate-300 cursor-pointer"></label>
-                            </div>
-                            <span class="text-xs font-bold text-on-surface">Jadikan Listing Unggulan (Hot Properti)</span>
-                        </label>
-                        <style>
-                            .toggle-checkbox:checked { right: 0; border-color: #00b1a7; }
-                            .toggle-checkbox:checked + .toggle-label { background-color: #00b1a7; }
-                            .toggle-checkbox { right: 20px; z-index: 1; border-color: #e2e8f0; border-width: 1px; }
-                        </style>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </form>
 </div>

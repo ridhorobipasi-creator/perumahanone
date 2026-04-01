@@ -1,175 +1,243 @@
 @extends('layouts.admin')
 
-@section('title', 'Pengaturan | Admin Bintang')
+@section('title', 'Pengaturan | Admin Bintang Property')
 
 @section('content')
-<!-- Content Canvas -->
-<div class="p-8 lg:p-12 max-w-6xl mx-auto">
-    <!-- Page Header -->
-    <div class="mb-12">
-        <h2 class="text-4xl font-black tracking-tight text-on-background mb-2">Pengaturan Sistem</h2>
-        <p class="text-secondary font-medium">Kelola profil identitas agensi, preferensi keamanan tingkat lanjut, dan konfigurasi global.</p>
-    </div>
+<style>
+    :root {
+        --a-card: #11111e; --a-border: rgba(255,255,255,0.06);
+        --a-accent: #10d9a0; --a-accent-d: rgba(16,217,160,0.1);
+        --a-text: #e8e8f0; --a-muted: #5a5a72; --a-surface: #0d0d17;
+    }
+    .settings-page { padding: 2.5rem; max-width: 1100px; }
+    .settings-title { font-size: 2rem; font-weight: 800; color: var(--a-text); margin-bottom: 0.375rem; }
+    .settings-sub { font-size: 0.875rem; color: var(--a-muted); margin-bottom: 2.5rem; }
 
-    <!-- Bento Layout for Settings -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Left Column: Navigation/Tabs -->
-        <div class="lg:col-span-1 space-y-6">
-            <div class="bg-surface-container-lowest rounded-3xl p-6 shadow-sm border border-slate-100">
-                <nav class="space-y-2">
-                    <a class="flex items-center justify-between p-3.5 rounded-2xl bg-primary text-white shadow-md shadow-primary/20 group transition-all font-bold text-sm" href="#company">
-                        <span class="flex items-center gap-3">
-                            <span class="material-symbols-outlined text-[20px]" data-icon="business">business</span> Profil Perusahaan
-                        </span>
-                        <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-[18px] translate-x-2 group-hover:translate-x-0" data-icon="chevron_right">chevron_right</span>
-                    </a>
-                    <a class="flex items-center justify-between p-3.5 rounded-2xl hover:bg-surface-container-low text-on-surface-variant group transition-all font-bold text-sm" href="#social">
-                        <span class="flex items-center gap-3">
-                            <span class="material-symbols-outlined text-[20px]" data-icon="share">share</span> Media Sosial
-                        </span>
-                        <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-[18px] text-primary" data-icon="chevron_right">chevron_right</span>
-                    </a>
-                    <a class="flex items-center justify-between p-3.5 rounded-2xl hover:bg-surface-container-low text-on-surface-variant group transition-all font-bold text-sm" href="#security">
-                        <span class="flex items-center gap-3">
-                            <span class="material-symbols-outlined text-[20px]" data-icon="shield_lock">shield_lock</span> Keamanan & Sandi
-                        </span>
-                        <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-[18px] text-primary" data-icon="chevron_right">chevron_right</span>
-                    </a>
-                    <a class="flex items-center justify-between p-3.5 rounded-2xl hover:bg-surface-container-low text-on-surface-variant group transition-all font-bold text-sm" href="#notifications">
-                        <span class="flex items-center gap-3">
-                            <span class="material-symbols-outlined text-[20px]" data-icon="notifications_active">notifications_active</span> Preferensi Notifikasi
-                        </span>
-                        <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-[18px] text-primary" data-icon="chevron_right">chevron_right</span>
-                    </a>
-                </nav>
+    .settings-grid { display: grid; grid-template-columns: 220px 1fr; gap: 2rem; }
+
+    /* Sidebar Nav */
+    .settings-nav-card { background: var(--a-card); border: 1px solid var(--a-border); border-radius: 18px; padding: 1rem; }
+    .snav-item {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 0.875rem 1rem; border-radius: 12px; margin-bottom: 2px;
+        text-decoration: none; font-size: 0.85rem; font-weight: 700;
+        transition: all 0.15s; cursor: pointer;
+    }
+    .snav-item.active { background: rgba(16,217,160,0.1); color: #10d9a0; }
+    .snav-item:not(.active) { color: var(--a-muted); }
+    .snav-item:not(.active):hover { background: rgba(255,255,255,0.04); color: var(--a-text); }
+    .snav-item-inner { display: flex; align-items: center; gap: 0.75rem; }
+
+    /* Help Card */
+    .help-card {
+        background: linear-gradient(135deg, rgba(16,217,160,0.07) 0%, rgba(99,102,241,0.07) 100%);
+        border: 1px solid rgba(16,217,160,0.12);
+        border-radius: 18px; padding: 1.5rem;
+        margin-top: 1rem; position: relative; overflow: hidden;
+    }
+    .help-deco { position: absolute; bottom: -20px; right: -20px; font-size: 90px; color: rgba(255,255,255,0.04); }
+    .help-card h4 { font-size: 0.9rem; font-weight: 800; color: var(--a-text); margin-bottom: 0.5rem; }
+    .help-card p { font-size: 0.78rem; color: var(--a-muted); line-height: 1.7; margin-bottom: 1rem; }
+    .help-card button { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #10d9a0; border: none; background: none; cursor: pointer; border-bottom: 1px solid rgba(16,217,160,0.3); padding-bottom: 1px; }
+
+    /* Form Sections */
+    .form-section { background: var(--a-card); border: 1px solid var(--a-border); border-radius: 18px; padding: 2rem; margin-bottom: 1.5rem; overflow: hidden; position: relative; }
+    .form-section::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #10d9a0; border-radius: 0; }
+    .fs-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.75rem; }
+    .fs-title { font-size: 1rem; font-weight: 800; color: var(--a-text); margin-bottom: 0.25rem; }
+    .fs-sub { font-size: 0.78rem; color: var(--a-muted); }
+    .fs-badge { font-size: 0.63rem; font-weight: 700; padding: 0.25rem 0.75rem; border-radius: 100px; background: rgba(16,217,160,0.08); border: 1px solid rgba(16,217,160,0.2); color: #10d9a0; white-space: nowrap;}
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem; }
+    .form-group:last-child { margin-bottom: 0; }
+    .form-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+    .form-ctrl {
+        background: rgba(255,255,255,0.04); border: 1px solid var(--a-border);
+        border-radius: 12px; padding: 0.875rem 1rem;
+        color: var(--a-text); font-size: 0.875rem; font-family: inherit;
+        outline: none; transition: border-color 0.2s; width: 100%;
+    }
+    .form-ctrl:focus { border-color: rgba(16,217,160,0.35); }
+    .form-ctrl-icon { position: relative; }
+    .form-ctrl-icon .icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #10d9a0; pointer-events: none; }
+    .form-ctrl-icon input { padding-left: 2.75rem; }
+    textarea.form-ctrl { min-height: 100px; resize: vertical; }
+
+    /* Social */
+    .social-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .social-icon { width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid var(--a-border); display: flex; align-items: center; justify-content: center; color: var(--a-muted); transition: all 0.15s; }
+    .social-row:hover .social-icon { background: rgba(16,217,160,0.08); color: #10d9a0; border-color: rgba(16,217,160,0.2); }
+
+    /* Security */
+    .security-profile { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1.75rem; padding-bottom: 1.75rem; border-bottom: 1px solid var(--a-border); }
+    .sec-avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(16,217,160,0.3); }
+    .sec-name { font-size: 1rem; font-weight: 800; color: var(--a-text); }
+    .sec-email { font-size: 0.78rem; color: var(--a-muted); margin-top: 2px; font-family: monospace; }
+    .two-fa-badge {
+        display: flex; align-items: flex-start; gap: 1rem;
+        background: rgba(16,217,160,0.06); border: 1px solid rgba(16,217,160,0.15);
+        border-radius: 14px; padding: 1.25rem; margin-top: 1.25rem;
+    }
+    .two-fa-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(16,217,160,0.12); display: flex; align-items: center; justify-content: center; color: #10d9a0; flex-shrink: 0; }
+    .two-fa-text h5 { font-size: 0.875rem; font-weight: 800; color: var(--a-text); margin-bottom: 0.375rem; }
+    .two-fa-text p { font-size: 0.78rem; color: var(--a-muted); line-height: 1.7; }
+
+    /* Actions */
+    .settings-actions { display: flex; justify-content: flex-end; gap: 0.875rem; padding-top: 1.5rem; border-top: 1px solid var(--a-border); }
+    .btn-cancel { padding: 0.75rem 1.5rem; background: rgba(255,255,255,0.04); border: 1px solid var(--a-border); border-radius: 12px; color: var(--a-muted); font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.15s; }
+    .btn-cancel:hover { color: var(--a-text); border-color: rgba(255,255,255,0.12); }
+    .btn-save { padding: 0.75rem 2rem; background: #10d9a0; color: #021a12; border: none; border-radius: 12px; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: background 0.15s, transform 0.15s; }
+    .btn-save:hover { background: #0ffba7; transform: translateY(-1px); }
+
+    @media(max-width:1024px) { .settings-grid { grid-template-columns: 1fr; } }
+    @media(max-width:640px) { .form-grid { grid-template-columns: 1fr; } .settings-page { padding: 1.5rem; } }
+</style>
+
+<div class="settings-page">
+    <div class="settings-title">Pengaturan Sistem</div>
+    <div class="settings-sub">Kelola profil identitas agensi, preferensi keamanan, dan konfigurasi global.</div>
+
+    <div class="settings-grid">
+        <!-- Nav -->
+        <div>
+            <div class="settings-nav-card">
+                <a href="#company" class="snav-item active">
+                    <div class="snav-item-inner">
+                        <span class="material-symbols-rounded" style="font-size:18px;">business</span>
+                        Profil Perusahaan
+                    </div>
+                    <span class="material-symbols-rounded" style="font-size:16px;opacity:0.4;">chevron_right</span>
+                </a>
+                <a href="#social" class="snav-item">
+                    <div class="snav-item-inner">
+                        <span class="material-symbols-rounded" style="font-size:18px;">share</span>
+                        Media Sosial
+                    </div>
+                    <span class="material-symbols-rounded" style="font-size:16px;opacity:0.4;">chevron_right</span>
+                </a>
+                <a href="#security" class="snav-item">
+                    <div class="snav-item-inner">
+                        <span class="material-symbols-rounded" style="font-size:18px;">shield_lock</span>
+                        Keamanan & Sandi
+                    </div>
+                    <span class="material-symbols-rounded" style="font-size:16px;opacity:0.4;">chevron_right</span>
+                </a>
+                <a href="#notifications" class="snav-item">
+                    <div class="snav-item-inner">
+                        <span class="material-symbols-rounded" style="font-size:18px;">notifications_active</span>
+                        Notifikasi
+                    </div>
+                    <span class="material-symbols-rounded" style="font-size:16px;opacity:0.4;">chevron_right</span>
+                </a>
             </div>
-
-            <!-- Small Help Card -->
-            <div class="bg-gradient-to-br from-teal-50 to-primary/5 rounded-3xl p-8 relative overflow-hidden border border-teal-100">
-                <div class="relative z-10">
-                    <h4 class="font-black text-teal-900 mb-2">Butuh Bantuan Teknis?</h4>
-                    <p class="text-xs text-secondary-fixed-dim leading-relaxed mb-4 font-medium">Tim manajer akun dedikasi kami siap membantu secara teknis 24/7 di jam kerja operasional.</p>
-                    <button class="text-primary text-[10px] font-black uppercase tracking-widest border-b-2 border-primary pb-1 hover:text-teal-900 hover:border-teal-900 transition-colors">Hubungi Layanan Support</button>
-                </div>
-                <!-- Decorative Icon -->
-                <span class="material-symbols-outlined absolute -bottom-4 -right-4 text-8xl text-teal-800/10 rotate-12 pointer-events-none" data-icon="support_agent">support_agent</span>
+            <div class="help-card">
+                <div class="help-deco material-symbols-rounded">support_agent</div>
+                <h4>Butuh Bantuan?</h4>
+                <p>Tim manajer akun kami siap membantu secara teknis 24/7 di jam kerja operasional.</p>
+                <button>Hubungi Support</button>
             </div>
         </div>
 
-        <!-- Right Column: Main Form Area -->
-        <div class="lg:col-span-2 space-y-8">
-            <!-- Company Information Section -->
-            <section class="bg-surface-container-lowest rounded-3xl p-8 lg:p-10 shadow-[0_10px_30px_rgba(0,0,0,0.02)] border border-slate-100 relative overflow-hidden" id="company">
-                <div class="absolute top-0 left-0 w-2 h-full bg-primary rounded-l-3xl"></div>
-                
-                <div class="flex items-center justify-between mb-8">
+        <!-- Form -->
+        <div>
+            <!-- Company Info -->
+            <div class="form-section" id="company">
+                <div class="fs-header">
                     <div>
-                        <h3 class="text-xl font-black text-on-background tracking-tight">Informasi Dasar Bisnis</h3>
-                        <p class="text-xs font-medium text-secondary mt-1">Identitas publik dari grup properti Anda yang dapat diakses klien.</p>
+                        <div class="fs-title">Informasi Dasar Bisnis</div>
+                        <div class="fs-sub">Identitas publik yang dapat diakses klien.</div>
                     </div>
-                    <span class="bg-primary/10 text-primary text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full border border-primary/20">Lisensi Enterprise</span>
+                    <div class="fs-badge">Lisensi Enterprise</div>
                 </div>
-                
-                <div class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-2">
-                            <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Nama Badan Hukum Bisnis</label>
-                            <input class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary/30 text-sm font-bold shadow-inner" type="text" value="PT Bintang Emerald Properti Tbk."/>
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">No. Izin Usaha Perdagangan (SIUP)</label>
-                            <input class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary/30 text-sm font-bold font-mono shadow-inner" type="text" value="RE-990-2134-XY"/>
+                <div class="form-grid">
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label">Nama Badan Hukum</label>
+                        <input class="form-ctrl" type="text" value="PT Bintang Emerald Properti Tbk."/>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label">No. SIUP</label>
+                        <input class="form-ctrl" type="text" value="RE-990-2134-XY" style="font-family:monospace;"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Alamat Kantor Pusat</label>
+                    <textarea class="form-ctrl">Jalan Ringroad Gagak Hitam No. 88, Suite 402,
+Medan Sunggal, Kota Medan, Sumatera Utara 20122</textarea>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label">Email Representatif</label>
+                        <div class="form-ctrl-icon">
+                            <span class="material-symbols-rounded icon" style="font-size:18px;">mail</span>
+                            <input class="form-ctrl" type="email" value="kontak@bintang-emerald.co.id"/>
                         </div>
                     </div>
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Alamat Kantor Pusat</label>
-                        <textarea class="min-w-full w-full bg-surface-container-low border-none rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary/30 text-sm font-medium leading-relaxed shadow-inner" rows="3">Jalan Ringroad Gagak Hitam No. 88, Suite 402, &#13;Medan Sunggal, Kota Medan, Sumatera Utara 20122</textarea>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-2">
-                            <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Email Representatif</label>
-                            <div class="relative">
-                                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary text-[20px]" data-icon="mail">mail</span>
-                                <input class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary/30 text-sm font-bold shadow-inner" type="email" value="kontak@bintang-emerald.co.id"/>
-                            </div>
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-[10px] font-black uppercase tracking-widest text-secondary block">Nomor Telepon Hotline</label>
-                            <div class="relative">
-                                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary text-[20px]" data-icon="call">call</span>
-                                <input class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary/30 text-sm font-bold font-mono shadow-inner" type="tel" value="+62 61 777 0192"/>
-                            </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label">Nomor Hotline</label>
+                        <div class="form-ctrl-icon">
+                            <span class="material-symbols-rounded icon" style="font-size:18px;">call</span>
+                            <input class="form-ctrl" type="tel" value="+62 61 777 0192"/>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- Social Media Links -->
-            <section class="bg-surface-container-lowest rounded-3xl p-8 lg:p-10 shadow-[0_10px_30px_rgba(0,0,0,0.02)] border border-slate-100" id="social">
-                <h3 class="text-xl font-black text-on-background mb-2 tracking-tight">Presensi Media Sosial</h3>
-                <p class="text-xs text-secondary mb-8 font-medium">Tautan yang digunakan untuk fitur "Watermark" pada brosur dan panel navigasi footer otomatis.</p>
-                <div class="space-y-4">
-                    <div class="flex items-center gap-4 group">
-                        <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container-low text-primary border border-slate-100 group-hover:bg-primary group-hover:text-white transition-colors">
-                            <span class="material-symbols-outlined" data-icon="language">language</span>
-                        </div>
-                        <input class="flex-1 bg-surface-container-low border-none rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-primary/30" placeholder="https://instagram.com/bintangemerald.mdn" type="text" value="https://instagram.com/bintangemerald.mdn"/>
-                    </div>
-                    <div class="flex items-center gap-4 group">
-                        <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container-low text-primary border border-slate-100 group-hover:bg-primary group-hover:text-white transition-colors">
-                            <span class="material-symbols-outlined" data-icon="alternate_email">alternate_email</span>
-                        </div>
-                        <input class="flex-1 bg-surface-container-low border-none rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-primary/30" placeholder="https://linkedin.com/company/bintangemerald" type="text"/>
-                    </div>
-                    <div class="flex items-center gap-4 group">
-                        <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container-low text-primary border border-slate-100 group-hover:bg-primary group-hover:text-white transition-colors">
-                            <span class="material-symbols-outlined" data-icon="movie">movie</span>
-                        </div>
-                        <input class="flex-1 bg-surface-container-low border-none rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-primary/30" placeholder="https://youtube.com/c/bintangemerald" type="text"/>
-                    </div>
-                </div>
-            </section>
-
-            <!-- User Account / Security Section -->
-            <section class="bg-slate-50 rounded-3xl p-8 lg:p-10 border border-slate-200 shadow-inner" id="security">
-                <div class="flex items-center gap-6 mb-8">
-                    <div class="w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-xl bg-white flex-shrink-0 relative">
-                        <div class="absolute inset-0 bg-primary/20 pointer-events-none"></div>
-                        <img alt="Profil Pengguna" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfevpJ4tetT6xpXKa7lNlsH5b0etygaHWMLIC3Ozoe1atm3CxnOieP7c1194LuZ1mbLTayAjMAmpspgYounuPg4XB4SRLjpYQFPyhGKzBiiok1gT88XDe02_vxrJorrFRGIUINTV3NuJK2FzNUrqXnsL8Ctr_1Jwj5DTNmtuZNV3xF07TWvwUWIuEtM4bBBgJD6qV_cLmlEG8NRoJfd-7GaeqwvetzlNFa0NFv04g9z31gLSnXt6-ybf88aa1o48rURZduZ6V8uus"/>
-                    </div>
+            <!-- Social Media -->
+            <div class="form-section" id="social">
+                <div class="fs-header" style="margin-bottom:1.25rem;">
                     <div>
-                        <h3 class="text-lg font-black text-on-background tracking-tight">Keamanan Akun Pribadi</h3>
-                        <p class="text-[11px] text-secondary font-bold uppercase tracking-widest mt-1">Sesi Aktif: <span class="text-primary normal-case font-mono tracking-normal">admin@bintang-emerald.co.id</span></p>
+                        <div class="fs-title">Presensi Media Sosial</div>
+                        <div class="fs-sub">Tautan untuk watermark dan footer navigasi.</div>
                     </div>
                 </div>
-                
-                <div class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-2">
-                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 block">Masukkan Sandi Saat Ini</label>
-                            <input class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3.5 focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm font-black text-slate-700 font-mono tracking-widest" type="password" value="secretdummy123"/>
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 block">Sandi Baru (Optional)</label>
-                            <input class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3.5 focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm font-medium" placeholder="Kosongkan bila sama" type="password"/>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-4 p-5 bg-teal-50 rounded-2xl border border-teal-100 flex items-start gap-4">
-                        <span class="material-symbols-outlined text-[24px] text-teal-600 bg-white rounded-full p-2 shadow-sm" data-icon="verified_user">verified_user</span>
-                        <div>
-                            <h5 class="text-sm font-bold text-teal-900 mb-1">Otentikasi Dua Faktor (2FA) Aktif</h5>
-                            <p class="text-[11px] text-teal-800/80 font-medium leading-relaxed">Sistem keamanan ganda "Bintang Emerald Secure" sedang melindungi sesi perangkat ini. OTP akan dikirimkan setiap durasi Token 24 Jam.</p>
-                        </div>
-                    </div>
+                <div class="social-row">
+                    <div class="social-icon"><span class="material-symbols-rounded" style="font-size:20px;">photo_camera</span></div>
+                    <input class="form-ctrl" type="text" value="https://instagram.com/bintangproperty.mdn" placeholder="Link Instagram"/>
                 </div>
-            </section>
+                <div class="social-row">
+                    <div class="social-icon"><span class="material-symbols-rounded" style="font-size:20px;">work</span></div>
+                    <input class="form-ctrl" type="text" placeholder="Link LinkedIn" />
+                </div>
+                <div class="social-row" style="margin-bottom:0;">
+                    <div class="social-icon"><span class="material-symbols-rounded" style="font-size:20px;">play_circle</span></div>
+                    <input class="form-ctrl" type="text" placeholder="Link YouTube" />
+                </div>
+            </div>
 
-            <!-- Form Actions -->
-            <div class="flex items-center justify-end gap-3 pt-6 border-t border-slate-100">
-                <button class="px-6 py-3.5 bg-slate-100 text-slate-500 font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-slate-200 transition-colors">Batalkan</button>
-                <button class="px-8 py-3.5 bg-gradient-to-br from-primary to-primary-container text-white font-black text-xs uppercase tracking-widest rounded-xl shadow-lg shadow-primary/30 hover:shadow-xl active:scale-[0.98] transition-all flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[16px]">save</span> Simpan Perubahan
+            <!-- Security -->
+            <div class="form-section" id="security">
+                <div class="security-profile">
+                    <img class="sec-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfevpJ4tetT6xpXKa7lNlsH5b0etygaHWMLIC3Ozoe1atm3CxnOieP7c1194LuZ1mbLTayAjMAmpspgYounuPg4XB4SRLjpYQFPyhGKzBiiok1gT88XDe02_vxrJorrFRGIUINTV3NuJK2FzNUrqXnsL8Ctr_1Jwj5DTNmtuZNV3xF07TWvwUWIuEtM4bBBgJD6qV_cLmlEG8NRoJfd-7GaeqwvetzlNFa0NFv04g9z31gLSnXt6-ybf88aa1o48rURZduZ6V8uus" alt="Admin"/>
+                    <div>
+                        <div class="sec-name">Keamanan Akun Pribadi</div>
+                        <div class="sec-email">admin@bintang-emerald.co.id</div>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label">Sandi Saat Ini</label>
+                        <input class="form-ctrl" type="password" value="secretdummy123"/>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label">Sandi Baru (Opsional)</label>
+                        <input class="form-ctrl" type="password" placeholder="Kosongkan bila sama"/>
+                    </div>
+                </div>
+                <div class="two-fa-badge">
+                    <div class="two-fa-icon"><span class="material-symbols-rounded">verified_user</span></div>
+                    <div class="two-fa-text">
+                        <h5>Otentikasi Dua Faktor (2FA) Aktif</h5>
+                        <p>Sistem keamanan ganda "Bintang Secure" sedang melindungi sesi ini. OTP dikirimkan setiap 24 jam.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="settings-actions">
+                <button class="btn-cancel">Batalkan</button>
+                <button class="btn-save">
+                    <span class="material-symbols-rounded" style="font-size:18px;">save</span>
+                    Simpan Perubahan
                 </button>
             </div>
         </div>

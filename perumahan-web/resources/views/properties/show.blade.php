@@ -1,148 +1,172 @@
 @extends('layouts.app')
 
+@section('title', 'Bintang Emerald Residence | Bintang Property Group')
+
+@section('head')
+<style>
+    .show-gallery { padding-top: 72px; background: var(--surface); }
+    .gallery-inner { max-width: 1440px; margin: 0 auto; padding: 1.5rem 2rem; }
+    .gallery-grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 1rem; height: 520px; }
+    .gallery-main { grid-row: 1 / 3; border-radius: 20px; overflow: hidden; position: relative; }
+    .gallery-main img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .gallery-main:hover img { transform: scale(1.04); }
+    .gallery-thumb { border-radius: 16px; overflow: hidden; position: relative; cursor: pointer; }
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .gallery-thumb:hover img { transform: scale(1.05); }
+    .gallery-thumb-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .gallery-thumb:hover .gallery-thumb-overlay { background: rgba(0,0,0,0.25); }
+    .gallery-thumb-btn { background: rgba(255,255,255,0.12); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 0.625rem 1.25rem; color: #fff; font-size: 0.82rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
+    .gallery-badges { position: absolute; bottom: 1.25rem; left: 1.25rem; display: flex; gap: 0.5rem; }
+    .g-badge { padding: 0.35rem 0.875rem; border-radius: 8px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
+    .g-badge.available { background: var(--accent); color: var(--accent-dark); }
+    .g-badge.ready { background: rgba(255,255,255,0.12); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); color: #fff; }
+
+    .show-body { background: var(--bg); padding: 3rem 2rem 5rem; }
+    .show-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 380px; gap: 3rem; }
+    .show-breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+    .show-breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+    .show-breadcrumb a:hover { color: var(--accent); }
+    .show-loc { display: flex; align-items: center; gap: 0.375rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.875rem; }
+    .show-title { font-family: 'DM Serif Display', serif; font-style: italic; font-size: clamp(2rem, 4vw, 3rem); color: var(--text); line-height: 1.1; margin-bottom: 2rem; }
+    .show-specs { display: flex; flex-wrap: wrap; gap: 1.25rem; padding: 1.5rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+    .spec-item { display: flex; align-items: center; gap: 0.875rem; }
+    .spec-icon { width: 48px; height: 48px; border-radius: 14px; background: var(--accent-dim); display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
+    .spec-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-faint); }
+    .spec-value { font-size: 1rem; font-weight: 800; color: var(--text); margin-top: 2px; }
+    .show-section { margin-bottom: 2.5rem; }
+    .show-section h2 { font-size: 1.25rem; font-weight: 800; color: var(--text); margin-bottom: 1rem; }
+    .show-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.9; }
+    .show-desc p + p { margin-top: 1rem; }
+    .facilities-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+    .facility-item { display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: 14px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); transition: border-color 0.2s; }
+    .facility-item:hover { border-color: var(--accent); }
+    .facility-item .material-symbols-rounded { color: var(--accent); flex-shrink: 0; }
+
+    /* Sticky Sidebar */
+    .show-sidebar { align-self: flex-start; position: sticky; top: 90px; }
+    .booking-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 2rem; box-shadow: var(--shadow-sm); }
+    .price-top { text-align: center; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
+    .price-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; }
+    .price-num { font-family: 'DM Serif Display', serif; font-size: 2.75rem; color: var(--accent); line-height: 1; }
+    .price-monthly { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.375rem; }
+    .booking-title { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 1rem; }
+    .booking-input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 0.875rem 1rem; color: var(--text); font-size: 0.875rem; font-family: inherit; outline: none; margin-bottom: 0.875rem; transition: border-color 0.2s; }
+    .booking-input::placeholder { color: var(--text-faint); }
+    .booking-input:focus { border-color: var(--accent); }
+    .booking-btn { width: 100%; padding: 1rem; background: var(--accent); color: var(--accent-dark); font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; border: none; border-radius: 12px; cursor: pointer; margin-bottom: 1rem; transition: background 0.2s, transform 0.15s; }
+    .booking-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .booking-wa { display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .booking-wa:hover { color: var(--accent); }
+
+    @media(max-width:1024px) { .show-inner { grid-template-columns: 1fr; } .show-sidebar { position: static; } }
+    @media(max-width:768px) { .gallery-grid { grid-template-columns: 1fr; height: auto; } .gallery-main { grid-row: auto; height: 260px; } .gallery-thumb { height: 130px; } .facilities-grid { grid-template-columns: 1fr 1fr; } }
+</style>
+@endsection
+
 @section('content')
-<!-- Hero Gallery -->
-<section class="pt-24 bg-slate-900 relative">
-    <div class="max-w-screen-2xl mx-auto px-4 md:px-8 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 h-[50vh] md:h-[70vh]">
-            <div class="md:col-span-2 h-full rounded-2xl overflow-hidden relative group">
-                <img alt="Fasad Bintang Emerald" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcqss5qvYFCb9Ix8globSWVx2UuuOzKerDdSP4jScricWyGU4CHEiLCZBJlanIE29x2DuiGdz6WHE-pdab72Y8yS35Zc2iZxGAwdjAvyeIlzmZOB3W0xjOKKzRAERXqo6u9uM17w3GmX0xhaskZfjs4GMy3TZKnxS5NHMuWhQ9_axzXx7_tz47tDXtQDYqBD07WGSSbKoKo3df3aFOUOdDafVj76EGVKitGovbbFWU-p-ZHWPmm9GkiofxEaZrveiuz5dPcJRkvV0" fetchpriority="high"/>
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-                <div class="absolute bottom-6 left-6 flex gap-3">
-                    <span class="bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-md uppercase tracking-wider">Tersedia</span>
-                    <span class="bg-white/20 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-md border border-white/30">Siap Huni</span>
+<!-- Gallery -->
+<div class="show-gallery">
+    <div class="gallery-inner">
+        <div class="gallery-grid">
+            <div class="gallery-main">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcqss5qvYFCb9Ix8globSWVx2UuuOzKerDdSP4jScricWyGU4CHEiLCZBJlanIE29x2DuiGdz6WHE-pdab72Y8yS35Zc2iZxGAwdjAvyeIlzmZOB3W0xjOKKzRAERXqo6u9uM17w3GmX0xhaskZfjs4GMy3TZKnxS5NHMuWhQ9_axzXx7_tz47tDXtQDYqBD07WGSSbKoKo3df3aFOUOdDafVj76EGVKitGovbbFWU-p-ZHWPmm9GkiofxEaZrveiuz5dPcJRkvV0" alt="Fasad Bintang Emerald" fetchpriority="high"/>
+                <div class="gallery-badges">
+                    <span class="g-badge available">Tersedia</span>
+                    <span class="g-badge ready">Siap Huni</span>
                 </div>
             </div>
-            <div class="hidden md:grid grid-rows-2 gap-4 h-full">
-                <div class="rounded-2xl overflow-hidden relative group">
-                    <img alt="Interior Ruang Tamu" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7lz969iWsPePZaJ5W-HVOzIJQUfehqD1DxTdp5NVQR1lpgqJbrcR-fomD_HDgfSqRe7ZvJmVTvHzMzOmq_-oLuAJGPnx2ZkvMP86zjH4WMECwejxyyvAejxYL8BnKzHw6Pn82UAp44lZdUqkqg2XbHwG2eikZBOGgF_gu11d4muj-d5mMU8kROyR13JPjKdV9bNo6hZv34vW36iyiIJ4c5hCNAB1s_cVS2PFNR03I605RjON8XRucqEoCEhFPXSw7jLbQB3EOAic" loading="lazy"/>
-                </div>
-                <div class="rounded-2xl overflow-hidden relative group cursor-pointer">
-                    <img alt="Kamar Tidur Utama" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvQ1uXSJeU1RNU4uVgSRKq9zUxRJNjEIIgGmPQ07hOulJpcLQ-NaEBStrS-2XFMQ5x12wtbbvTooOl62wUi4BQH0yjxMoJwawFRHdaUK1jcitTvG1qFx9xbBhM0FctOvbQ5zfSuMRZsUgJsAf9AQ7akGi5PykIL_JhPj3W7S8AnRWIUd_kn4ZWilYLGYl27_JdmCMO9IXf623jHyfFJIitel5kiSumXsO1Ch3pMduTKK07A5_5zphU2iX_mxcmjVhdaIBo6Ow5__Q" loading="lazy"/>
-                    <div class="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/20 transition-colors flex items-center justify-center">
-                        <div class="bg-white/20 backdrop-blur-md text-white font-bold px-4 py-2 rounded-lg flex items-center gap-2 border border-white/30">
-                            <span class="material-symbols-outlined">photo_library</span> +8 Foto
-                        </div>
+            <div class="gallery-thumb">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7lz969iWsPePZaJ5W-HVOzIJQUfehqD1DxTdp5NVQR1lpgqJbrcR-fomD_HDgfSqRe7ZvJmVTvHzMzOmq_-oLuAJGPnx2ZkvMP86zjH4WMECwejxyyvAejxYL8BnKzHw6Pn82UAp44lZdUqkqg2XbHwG2eikZBOGgF_gu11d4muj-d5mMU8kROyR13JPjKdV9bNo6hZv34vW36iyiIJ4c5hCNAB1s_cVS2PFNR03I605RjON8XRucqEoCEhFPXSw7jLbQB3EOAic" alt="Interior" loading="lazy"/>
+            </div>
+            <div class="gallery-thumb">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvQ1uXSJeU1RNU4uVgSRKq9zUxRJNjEIIgGmPQ07hOulJpcLQ-NaEBStrS-2XFMQ5x12wtbbvTooOl62wUi4BQH0yjxMoJwawFRHdaUK1jcitTvG1qFx9xbBhM0FctOvbQ5zfSuMRZsUgJsAf9AQ7akGi5PykIL_JhPj3W7S8AnRWIUd_kn4ZWilYLGYl27_JdmCMO9IXf623jHyfFJIitel5kiSumXsO1Ch3pMduTKK07A5_5zphU2iX_mxcmjVhdaIBo6Ow5__Q" alt="Kamar Tidur" loading="lazy"/>
+                <div class="gallery-thumb-overlay">
+                    <div class="gallery-thumb-btn">
+                        <span class="material-symbols-rounded" style="font-size:18px;">photo_library</span> +8 Foto
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
-<!-- Content -->
-<section class="py-12 bg-slate-50 relative -mt-6 rounded-t-3xl z-20">
-    <div class="max-w-screen-xl mx-auto px-8 flex flex-col lg:flex-row gap-12">
-        
-        <!-- Main Info -->
-        <div class="lg:w-2/3">
-            <div class="mb-8">
-                <div class="flex items-center gap-2 text-slate-500 font-bold uppercase tracking-widest text-xs mb-3">
-                    <span class="material-symbols-outlined text-emerald-600 text-sm">location_on</span>
-                    Jl. Jamin Ginting, Medan Johor
+<!-- Body -->
+<section class="show-body">
+    <div class="show-inner">
+        <div>
+            <div class="show-breadcrumb">
+                <a href="{{ url('/') }}">Beranda</a>
+                <span class="material-symbols-rounded" style="font-size:14px;">chevron_right</span>
+                <a href="{{ url('/properties') }}">Properti</a>
+                <span class="material-symbols-rounded" style="font-size:14px;">chevron_right</span>
+                <span style="color:var(--text-faint);">Bintang Emerald Residence</span>
+            </div>
+            <div class="show-loc">
+                <span class="material-symbols-rounded" style="font-size:16px;">location_on</span>
+                Jl. Jamin Ginting, Medan Johor
+            </div>
+            <h1 class="show-title">Bintang Emerald<br/>Residence</h1>
+
+            <div class="show-specs">
+                <div class="spec-item">
+                    <div class="spec-icon"><span class="material-symbols-rounded">bed</span></div>
+                    <div><div class="spec-label">Kamar Tidur</div><div class="spec-value">4 Ruang</div></div>
                 </div>
-                <h1 class="text-4xl md:text-5xl font-black tracking-tighter text-slate-900 mb-6">Bintang Emerald Residence</h1>
-                
-                <div class="flex flex-wrap gap-6 py-6 border-y border-slate-200">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
-                            <span class="material-symbols-outlined">bed</span>
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold uppercase tracking-widest text-slate-500">Kamar Tidur</p>
-                            <p class="text-lg font-black text-slate-900">4 Ruang</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
-                            <span class="material-symbols-outlined">bathtub</span>
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold uppercase tracking-widest text-slate-500">Kamar Mandi</p>
-                            <p class="text-lg font-black text-slate-900">3 Ruang</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
-                            <span class="material-symbols-outlined">square_foot</span>
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold uppercase tracking-widest text-slate-500">Luas Bangunan</p>
-                            <p class="text-lg font-black text-slate-900">180 M²</p>
-                        </div>
-                    </div>
+                <div class="spec-item">
+                    <div class="spec-icon"><span class="material-symbols-rounded">bathtub</span></div>
+                    <div><div class="spec-label">Kamar Mandi</div><div class="spec-value">3 Ruang</div></div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-icon"><span class="material-symbols-rounded">square_foot</span></div>
+                    <div><div class="spec-label">Luas Bangunan</div><div class="spec-value">180 M²</div></div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-icon"><span class="material-symbols-rounded">garage</span></div>
+                    <div><div class="spec-label">Carport</div><div class="spec-value">2 Mobil</div></div>
                 </div>
             </div>
 
-            <div class="mb-12">
-                <h2 class="text-2xl font-black tracking-tight text-slate-900 mb-4">Deskripsi Properti</h2>
-                <div class="prose prose-slate max-w-none text-slate-600 leading-relaxed">
+            <div class="show-section">
+                <h2>Deskripsi Properti</h2>
+                <div class="show-desc">
                     <p>Bintang Emerald Residence mendefinisikan ulang kemewahan urban di jantung kota Medan. Didesain oleh arsitek terkemuka, hunian ini memadukan estetika minimalis modern dengan fungsionalitas ruang yang maksimal.</p>
-                    <p>Setiap unit dilengkapi dengan sistem sirkulasi udara pintar (cross-ventilation) dan jendela floor-to-ceiling yang memastikan pencahayaan alami sepanjang hari. Material premium seperti marmer impor dan kayu solid digunakan untuk memberikan sentuhan akhir yang elegan.</p>
+                    <p>Setiap unit dilengkapi dengan sistem sirkulasi udara pintar dan jendela floor-to-ceiling yang memastikan pencahayaan alami sepanjang hari. Material premium seperti marmer impor dan kayu solid untuk sentuhan akhir yang elegan.</p>
                     <p>Fasilitas perumahan mencakup sistem keamanan pintar 24 jam, kolam renang infinity bergaya resort, pusat kebugaran, dan taman bermain anak yang dikelilingi lanskap hijau yang asri.</p>
                 </div>
             </div>
 
-            <div class="mb-12">
-                <h2 class="text-2xl font-black tracking-tight text-slate-900 mb-6">Fasilitas Unggulan</h2>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="flex items-center gap-3 p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
-                        <span class="material-symbols-outlined text-emerald-500">security</span>
-                        <span class="text-sm font-bold text-slate-700">Keamanan 24 Jam</span>
-                    </div>
-                    <div class="flex items-center gap-3 p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
-                        <span class="material-symbols-outlined text-emerald-500">pool</span>
-                        <span class="text-sm font-bold text-slate-700">Clubhouse & Kolam</span>
-                    </div>
-                    <div class="flex items-center gap-3 p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
-                        <span class="material-symbols-outlined text-emerald-500">park</span>
-                        <span class="text-sm font-bold text-slate-700">Taman Tematik</span>
-                    </div>
-                    <div class="flex items-center gap-3 p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
-                        <span class="material-symbols-outlined text-emerald-500">ev_station</span>
-                        <span class="text-sm font-bold text-slate-700">Smart Home Ready</span>
-                    </div>
-                    <div class="flex items-center gap-3 p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
-                        <span class="material-symbols-outlined text-emerald-500">local_cafe</span>
-                        <span class="text-sm font-bold text-slate-700">Area Komersial</span>
-                    </div>
-                    <div class="flex items-center gap-3 p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
-                        <span class="material-symbols-outlined text-emerald-500">garage</span>
-                        <span class="text-sm font-bold text-slate-700">Carport 2 Mobil</span>
-                    </div>
+            <div class="show-section">
+                <h2>Fasilitas Unggulan</h2>
+                <div class="facilities-grid">
+                    <div class="facility-item"><span class="material-symbols-rounded">security</span>Keamanan 24 Jam</div>
+                    <div class="facility-item"><span class="material-symbols-rounded">pool</span>Clubhouse & Kolam</div>
+                    <div class="facility-item"><span class="material-symbols-rounded">park</span>Taman Tematik</div>
+                    <div class="facility-item"><span class="material-symbols-rounded">home_iot_device</span>Smart Home Ready</div>
+                    <div class="facility-item"><span class="material-symbols-rounded">local_cafe</span>Area Komersial</div>
+                    <div class="facility-item"><span class="material-symbols-rounded">garage</span>Carport 2 Mobil</div>
                 </div>
             </div>
         </div>
 
         <!-- Sticky Sidebar -->
-        <aside class="lg:w-1/3">
-            <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 sticky top-24">
-                <div class="text-center mb-6">
-                    <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Harga Perdana Mulai</p>
-                    <p class="text-4xl font-black text-emerald-600 tracking-tighter">Rp 1,85 M</p>
-                    <p class="text-sm text-slate-400 mt-2">Estimasi cicilan: Rp 14 Jt/bln</p>
+        <aside class="show-sidebar">
+            <div class="booking-card">
+                <div class="price-top">
+                    <div class="price-label">Harga Perdana Mulai</div>
+                    <div class="price-num">Rp 1,85 M</div>
+                    <div class="price-monthly">Estimasi cicilan: Rp 14 Jt/bln</div>
                 </div>
-                
-                <hr class="border-slate-100 mb-6"/>
-                
-                <h3 class="font-bold text-slate-900 mb-4">Jadwalkan Kunjungan</h3>
-                <form class="space-y-4 mb-6">
-                    <input class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-emerald-500 transition-all" placeholder="Nama Lengkap" type="text"/>
-                    <input class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-emerald-500 transition-all" placeholder="Nomor Telepon/WA" type="tel"/>
-                    <div class="relative">
-                        <input class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-emerald-500 transition-all cursor-pointer" type="date"/>
-                    </div>
-                    <button class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-4 rounded-xl font-bold uppercase tracking-wider text-sm transition-all shadow-lg shadow-emerald-600/30">
-                        Pesan Jadwal
-                    </button>
+                <div class="booking-title">Jadwalkan Kunjungan</div>
+                <form>
+                    <input class="booking-input" type="text" placeholder="Nama Lengkap"/>
+                    <input class="booking-input" type="tel" placeholder="Nomor Telepon/WA"/>
+                    <input class="booking-input" type="date"/>
+                    <button type="submit" class="booking-btn">Pesan Jadwal</button>
                 </form>
-                
-                <div class="flex items-center justify-center gap-2">
-                    <span class="text-xs text-slate-500">Atau hubungi via</span>
-                    <a href="https://wa.me/6281200000000" target="_blank" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
-                        <span class="material-symbols-outlined text-[14px]">chat</span> WhatsApp
-                    </a>
-                </div>
+                <a href="https://wa.me/6281200000000" target="_blank" class="booking-wa">
+                    <span class="material-symbols-rounded" style="font-size:16px;">chat</span>
+                    Atau hubungi via WhatsApp
+                </a>
             </div>
         </aside>
     </div>
