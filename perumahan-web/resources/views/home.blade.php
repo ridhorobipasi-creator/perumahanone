@@ -208,8 +208,8 @@
                 <li><span class="material-symbols-rounded">verified</span>Keamanan 24 Jam Terintegrasi CCTV</li>
                 <li><span class="material-symbols-rounded">verified</span>KPR Subsidi & Konvensional Tersedia</li>
             </ul>
-            <a href="{{ url('/contact') }}" class="btn-outline">
-                Konsultasi Sekarang
+            <a href="{{ url('/about') }}" class="btn-outline">
+                Selengkapnya Mengenai Kami
                 <span class="material-symbols-rounded" style="font-size:18px;">arrow_forward</span>
             </a>
         </div>
@@ -221,8 +221,8 @@
     <div class="properties-inner">
         <div class="section-header">
             <div>
-                <div class="section-eyebrow">Koleksi Premium</div>
-                <h2 class="section-title" style="margin-bottom:0;">Proyek Pilihan<br/>di Sumut</h2>
+                <div class="section-eyebrow">Koleksi Pilihan</div>
+                <h2 class="section-title" style="margin-bottom:0;">Proyek Unggulan<br/>Kami Saat Ini</h2>
             </div>
             <a href="{{ url('/properties') }}" class="btn-outline" style="flex-shrink:0;">
                 Lihat Semua Katalog
@@ -230,54 +230,26 @@
             </a>
         </div>
         <div class="properties-grid">
-            <a href="{{ url('/properties/bintang-emerald') }}" class="prop-card">
+            @foreach($featured as $p)
+            <a href="{{ url('/properties/' . $p->slug) }}" class="prop-card">
                 <div class="prop-card-img">
-                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcqss5qvYFCb9Ix8globSWVx2UuuOzKerDdSP4jScricWyGU4CHEiLCZBJlanIE29x2DuiGdz6WHE-pdab72Y8yS35Zc2iZxGAwdjAvyeIlzmZOB3W0xjOKKzRAERXqo6u9uM17w3GmX0xhaskZfjs4GMy3TZKnxS5NHMuWhQ9_axzXx7_tz47tDXtQDYqBD07WGSSbKoKo3df3aFOUOdDafVj76EGVKitGovbbFWU-p-ZHWPmm9GkiofxEaZrveiuz5dPcJRkvV0" alt="Sicoland Green" loading="lazy" decoding="async"/>
-                    <div class="prop-badge new">Baru Launching</div>
+                    <img src="{{ $p->main_image }}" alt="{{ $p->title }}" loading="lazy" decoding="async"/>
+                    @if($p->is_featured)
+                        <div class="prop-badge exclusive">Pilihan Utama</div>
+                    @endif
                 </div>
                 <div class="prop-card-body">
-                    <div class="prop-location"><span class="material-symbols-rounded">location_on</span>Deli Serdang, Sumut</div>
-                    <div class="prop-name">Sicoland Green</div>
+                    <div class="prop-location"><span class="material-symbols-rounded">location_on</span>{{ $p->city }}</div>
+                    <div class="prop-name">{{ $p->title }}</div>
                     <div class="prop-meta">
-                        <div class="prop-meta-item"><span class="material-symbols-rounded">bed</span>3</div>
-                        <div class="prop-meta-item"><span class="material-symbols-rounded">bathtub</span>2</div>
-                        <div class="prop-meta-item" style="margin-left:auto;"><span class="material-symbols-rounded">square_foot</span>120m²</div>
+                        <div class="prop-meta-item"><span class="material-symbols-rounded">bed</span>{{ $p->bedrooms ?: '-' }}</div>
+                        <div class="prop-meta-item"><span class="material-symbols-rounded">bathtub</span>{{ $p->bathrooms ?: '-' }}</div>
+                        <div class="prop-meta-item" style="margin-left:auto;"><span class="material-symbols-rounded" style="font-size:16px;">square_foot</span>{{ $p->build_size }}m²</div>
                     </div>
-                    <div class="prop-price-row"><span class="prop-price-label">Mulai Dari</span><span class="prop-price">Rp 850 Jt</span></div>
+                    <div class="prop-price-row"><span class="prop-price-label">Mulai Dari</span><span class="prop-price">Rp {{ number_format($p->price / 1000000, 0, ',', '.') }} Jt</span></div>
                 </div>
             </a>
-            <a href="{{ url('/properties/bintang-emerald') }}" class="prop-card">
-                <div class="prop-card-img">
-                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyB_kFlUTR5Dl_XyEl9nQU-Tc5LaeUwqb8aetADaacVUVrXci2i_b30akqRD6njTBIEGN33B0r31QfJ_McWNaO1BEuCYnlpmgstT-NjVq_ZL_-7VaWwwZwwNE5sUHjmX-koMXQXjYWnzSYEfJNEU7GG4fp_Cc5WYUM2G1tDZnsGQaUI_CZEYq_fzhjngD8mh-c8oW9BlKckwzICaCyiqZx0bPsiJV0mDSES_Fh1UGXB8a9uKeXIqm0PT43rxKXRgVTfWC0fNP0Z_A" alt="Puri Hamparan Perak" loading="lazy" decoding="async"/>
-                    <div class="prop-badge hot">Terjual 80%</div>
-                </div>
-                <div class="prop-card-body">
-                    <div class="prop-location"><span class="material-symbols-rounded">location_on</span>Area Binjai & Langkat</div>
-                    <div class="prop-name">Puri Hamparan Perak</div>
-                    <div class="prop-meta">
-                        <div class="prop-meta-item"><span class="material-symbols-rounded">bed</span>2</div>
-                        <div class="prop-meta-item"><span class="material-symbols-rounded">bathtub</span>1</div>
-                        <div class="prop-meta-item" style="margin-left:auto;"><span class="material-symbols-rounded">square_foot</span>45m²</div>
-                    </div>
-                    <div class="prop-price-row"><span class="prop-price-label">Mulai Dari</span><span class="prop-price">Rp 425 Jt</span></div>
-                </div>
-            </a>
-            <a href="{{ url('/properties/bintang-emerald') }}" class="prop-card">
-                <div class="prop-card-img">
-                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJqsFnw1o5HUTEoVCLXSKyFHkN0dJKQXkdYszXNRnWpVluexQJuirV9Hv_eiiGJsP0SoFTF-7Pk4yYXOj4QXVRJKF9A3AtUoVOu1Ep12bLtOb2Z7zOtXwzvu5y912W8nIpd5nsZynaj8v8v-Q5VfPp8c-LP8fj0vl4AtZYnN2GfmDNrj_BNUiNK5KwMwy_TclJf5f-4m36PsUUpglAW64f4jthrVx1qqIbnYyi7LsfIYg9LYkqV4TD8EOVyE69ns2hi11UXJJBl9c" alt="Bintang Residence" loading="lazy" decoding="async"/>
-                    <div class="prop-badge exclusive">Eksklusif</div>
-                </div>
-                <div class="prop-card-body">
-                    <div class="prop-location"><span class="material-symbols-rounded">location_on</span>Johor, Kota Medan</div>
-                    <div class="prop-name">Bintang Residence</div>
-                    <div class="prop-meta">
-                        <div class="prop-meta-item"><span class="material-symbols-rounded">bed</span>4</div>
-                        <div class="prop-meta-item"><span class="material-symbols-rounded">bathtub</span>3</div>
-                        <div class="prop-meta-item" style="margin-left:auto;"><span class="material-symbols-rounded">pool</span>Privat</div>
-                    </div>
-                    <div class="prop-price-row"><span class="prop-price-label">Mulai Dari</span><span class="prop-price">Rp 1.2 M</span></div>
-                </div>
-            </a>
+            @endforeach
         </div>
     </div>
 </section>

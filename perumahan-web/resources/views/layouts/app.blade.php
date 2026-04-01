@@ -61,6 +61,10 @@
             --gradient-card:  linear-gradient(135deg, rgba(16,217,160,0.06) 0%, rgba(99,102,241,0.06) 100%);
             --font-sans:      'Plus Jakarta Sans', sans-serif;
             --font-serif:     'DM Serif Display', serif;
+            --error:          #f87171;
+            --error-dim:      rgba(248,113,113,0.12);
+            --warning:        #f59e0b;
+            --warning-dim:    rgba(245,158,11,0.12);
             color-scheme: dark;
         }
         [data-theme="light"] {
@@ -87,6 +91,10 @@
             --nav-blur-bg:    rgba(255,255,255,0.92);
             --footer-bg:      #1e293b;
             --gradient-card:  linear-gradient(135deg, rgba(5,150,105,0.05) 0%, rgba(79,70,229,0.05) 100%);
+            --error:          #dc2626;
+            --error-dim:      rgba(220,38,38,0.10);
+            --warning:        #d97706;
+            --warning-dim:    rgba(217,119,6,0.10);
             color-scheme: light;
         }
 
@@ -344,10 +352,10 @@
 
         <ul class="nav-links">
             <li><a href="{{ url('/') }}"           class="{{ request()->is('/')          ? 'active' : '' }}">Beranda</a></li>
-            <li><a href="#tentang"                 class="">Tentang</a></li>
+            <li><a href="{{ url('/about') }}"      class="{{ request()->is('about*')     ? 'active' : '' }}">Tentang</a></li>
             <li><a href="{{ url('/properties') }}" class="{{ request()->is('properties*') ? 'active' : '' }}">Proyek</a></li>
-            <li><a href="#"                        class="">Promo</a></li>
-            <li><a href="#"                        class="">Artikel</a></li>
+            <li><a href="{{ url('/promo') }}"         class="{{ request()->is('promo*')     ? 'active' : '' }}">Promo</a></li>
+            <li><a href="{{ url('/articles') }}"      class="{{ request()->is('articles*')  ? 'active' : '' }}">Artikel</a></li>
             <li><a href="{{ url('/contact') }}"    class="{{ request()->is('contact*')   ? 'active' : '' }}">Kontak</a></li>
         </ul>
 
@@ -399,11 +407,15 @@
             <span class="material-symbols-rounded">apartment</span>Proyek Kami
             <span class="md-arrow material-symbols-rounded">chevron_right</span>
         </a>
-        <a href="#"                        class="md-link">
+        <a href="{{ url('/about') }}"      class="md-link {{ request()->is('about*')      ? 'md-active' : '' }}">
+            <span class="material-symbols-rounded">info</span>Tentang Kami
+            <span class="md-arrow material-symbols-rounded">chevron_right</span>
+        </a>
+        <a href="{{ url('/promo') }}"      class="md-link {{ request()->is('promo*')      ? 'md-active' : '' }}">
             <span class="material-symbols-rounded">local_offer</span>Promo
             <span class="md-arrow material-symbols-rounded">chevron_right</span>
         </a>
-        <a href="#"                        class="md-link">
+        <a href="{{ url('/articles') }}"   class="md-link {{ request()->is('articles*')   ? 'md-active' : '' }}">
             <span class="material-symbols-rounded">article</span>Artikel
             <span class="md-arrow material-symbols-rounded">chevron_right</span>
         </a>
@@ -464,8 +476,8 @@
                 <ul class="footer-links">
                     <li><a href="{{ url('/') }}">Beranda</a></li>
                     <li><a href="{{ url('/properties') }}">Proyek Kami</a></li>
-                    <li><a href="#">Tentang Kami</a></li>
-                    <li><a href="#">Artikel</a></li>
+                    <li><a href="{{ url('/promo') }}">Promo</a></li>
+                    <li><a href="{{ url('/articles') }}">Artikel</a></li>
                     <li><a href="{{ url('/contact') }}">Kontak</a></li>
                 </ul>
             </div>

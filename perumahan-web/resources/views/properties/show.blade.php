@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Bintang Emerald Residence | Bintang Property Group')
+@section('title', ($prop->title ?? 'Detail Properti') . ' | Bintang Property Group')
 
 @section('head')
 <style>
@@ -27,7 +27,7 @@
     .show-breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
     .show-breadcrumb a:hover { color: var(--accent); }
     .show-loc { display: flex; align-items: center; gap: 0.375rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.875rem; }
-    .show-title { font-family: 'DM Serif Display', serif; font-style: italic; font-size: clamp(2rem, 4vw, 3rem); color: var(--text); line-height: 1.1; margin-bottom: 2rem; }
+    .show-title { font-family: 'DM Serif Display', serif; font-style: italic; font-size: clamp(2rem, 4vw, 3rem); color: var(--text); line-height: 1.1; margin-bottom: 2rem; text-wrap: balance; }
     .show-specs { display: flex; flex-wrap: wrap; gap: 1.25rem; padding: 1.5rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
     .spec-item { display: flex; align-items: center; gap: 0.875rem; }
     .spec-icon { width: 48px; height: 48px; border-radius: 14px; background: var(--accent-dim); display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
@@ -47,7 +47,7 @@
     .booking-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 2rem; box-shadow: var(--shadow-sm); }
     .price-top { text-align: center; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
     .price-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; }
-    .price-num { font-family: 'DM Serif Display', serif; font-size: 2.75rem; color: var(--accent); line-height: 1; }
+    .price-num { font-family: 'DM Serif Display', serif; font-size: 2.4rem; color: var(--accent); line-height: 1; letter-spacing: -0.02em; }
     .price-monthly { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.375rem; }
     .booking-title { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 1rem; }
     .booking-input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 0.875rem 1rem; color: var(--text); font-size: 0.875rem; font-family: inherit; outline: none; margin-bottom: 0.875rem; transition: border-color 0.2s; }
@@ -69,9 +69,9 @@
     <div class="gallery-inner">
         <div class="gallery-grid">
             <div class="gallery-main">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcqss5qvYFCb9Ix8globSWVx2UuuOzKerDdSP4jScricWyGU4CHEiLCZBJlanIE29x2DuiGdz6WHE-pdab72Y8yS35Zc2iZxGAwdjAvyeIlzmZOB3W0xjOKKzRAERXqo6u9uM17w3GmX0xhaskZfjs4GMy3TZKnxS5NHMuWhQ9_axzXx7_tz47tDXtQDYqBD07WGSSbKoKo3df3aFOUOdDafVj76EGVKitGovbbFWU-p-ZHWPmm9GkiofxEaZrveiuz5dPcJRkvV0" alt="Fasad Bintang Emerald" fetchpriority="high"/>
+                <img src="{{ $prop->main_image }}" alt="{{ $prop->title }}" fetchpriority="high"/>
                 <div class="gallery-badges">
-                    <span class="g-badge available">Tersedia</span>
+                    <span class="g-badge available">{{ $prop->status }}</span>
                     <span class="g-badge ready">Siap Huni</span>
                 </div>
             </div>
@@ -99,26 +99,26 @@
                 <span class="material-symbols-rounded" style="font-size:14px;">chevron_right</span>
                 <a href="{{ url('/properties') }}">Properti</a>
                 <span class="material-symbols-rounded" style="font-size:14px;">chevron_right</span>
-                <span style="color:var(--text-faint);">Bintang Emerald Residence</span>
+                <span style="color:var(--text-faint);">{{ $prop->title }}</span>
             </div>
             <div class="show-loc">
                 <span class="material-symbols-rounded" style="font-size:16px;">location_on</span>
-                Jl. Jamin Ginting, Medan Johor
+                {{ $prop->city }}
             </div>
-            <h1 class="show-title">Bintang Emerald<br/>Residence</h1>
+            <h1 class="show-title">{{ $prop->title }}</h1>
 
             <div class="show-specs">
                 <div class="spec-item">
                     <div class="spec-icon"><span class="material-symbols-rounded">bed</span></div>
-                    <div><div class="spec-label">Kamar Tidur</div><div class="spec-value">4 Ruang</div></div>
+                    <div><div class="spec-label">Kamar Tidur</div><div class="spec-value">{{ $prop->bedrooms > 0 ? $prop->bedrooms . ' Ruang' : '-' }}</div></div>
                 </div>
                 <div class="spec-item">
                     <div class="spec-icon"><span class="material-symbols-rounded">bathtub</span></div>
-                    <div><div class="spec-label">Kamar Mandi</div><div class="spec-value">3 Ruang</div></div>
+                    <div><div class="spec-label">Kamar Mandi</div><div class="spec-value">{{ $prop->bathrooms > 0 ? $prop->bathrooms . ' Ruang' : '-' }}</div></div>
                 </div>
                 <div class="spec-item">
                     <div class="spec-icon"><span class="material-symbols-rounded">square_foot</span></div>
-                    <div><div class="spec-label">Luas Bangunan</div><div class="spec-value">180 M²</div></div>
+                    <div><div class="spec-label">Luas Bangunan</div><div class="spec-value">{{ $prop->build_size }} M²</div></div>
                 </div>
                 <div class="spec-item">
                     <div class="spec-icon"><span class="material-symbols-rounded">garage</span></div>
@@ -129,7 +129,7 @@
             <div class="show-section">
                 <h2>Deskripsi Properti</h2>
                 <div class="show-desc">
-                    <p>Bintang Emerald Residence mendefinisikan ulang kemewahan urban di jantung kota Medan. Didesain oleh arsitek terkemuka, hunian ini memadukan estetika minimalis modern dengan fungsionalitas ruang yang maksimal.</p>
+                    <p>{{ $prop->title }} mendefinisikan ulang kemewahan urban di {{ $prop->city }}. Didesain oleh arsitek terkemuka, hunian ini memadukan estetika minimalis modern dengan fungsionalitas ruang yang maksimal.</p>
                     <p>Setiap unit dilengkapi dengan sistem sirkulasi udara pintar dan jendela floor-to-ceiling yang memastikan pencahayaan alami sepanjang hari. Material premium seperti marmer impor dan kayu solid untuk sentuhan akhir yang elegan.</p>
                     <p>Fasilitas perumahan mencakup sistem keamanan pintar 24 jam, kolam renang infinity bergaya resort, pusat kebugaran, dan taman bermain anak yang dikelilingi lanskap hijau yang asri.</p>
                 </div>
@@ -153,17 +153,18 @@
             <div class="booking-card">
                 <div class="price-top">
                     <div class="price-label">Harga Perdana Mulai</div>
-                    <div class="price-num">Rp 1,85 M</div>
-                    <div class="price-monthly">Estimasi cicilan: Rp 14 Jt/bln</div>
+                    <div class="price-num">Rp {{ number_format($prop->price / 1000000, 1, ',', '.') }} Jt</div>
+                    <div class="price-monthly">Estimasi cicilan: Rp {{ number_format(($prop->price * 0.007) / 1000000, 1, ',', '.') }} Jt/bln</div>
                 </div>
                 <div class="booking-title">Jadwalkan Kunjungan</div>
-                <form>
-                    <input class="booking-input" type="text" placeholder="Nama Lengkap"/>
-                    <input class="booking-input" type="tel" placeholder="Nomor Telepon/WA"/>
-                    <input class="booking-input" type="date"/>
+                <form action="{{ url('/contact') }}" method="POST">
+                    @csrf
+                    <input class="booking-input" name="name" type="text" placeholder="Nama Lengkap" required/>
+                    <input class="booking-input" name="phone" type="tel" placeholder="Nomor Telepon/WA" required/>
+                    <input class="booking-input" name="date" type="date" required/>
                     <button type="submit" class="booking-btn">Pesan Jadwal</button>
                 </form>
-                <a href="https://wa.me/6281200000000" target="_blank" class="booking-wa">
+                <a href="https://wa.me/6281200000000?text=Halo Bintang Property, saya tertarik dengan {{ $prop->title }}" target="_blank" class="booking-wa">
                     <span class="material-symbols-rounded" style="font-size:16px;">chat</span>
                     Atau hubungi via WhatsApp
                 </a>
@@ -172,3 +173,4 @@
     </div>
 </section>
 @endsection
+
